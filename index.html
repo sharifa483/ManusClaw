@@ -4,39 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ManusClaw v5.0.0 — The Ultimate Autonomous AI Ecosystem</title>
-    
+
     <!-- Fonts: Inter (Body), Outfit (Headings), Fira Code (Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        /* CSS Variables - Absolutely NO BLACK Colors Used */
         :root {
             --bg: #ffffff;
-            --text-main: #1e1e38; /* Deep indigo text */
+            --text-main: #1e1e38;
             --text-muted: #4a4a68;
             --accent: #5b5fef;
             --accent-glow: #7c3aed;
-            
-            /* Glass UI Variables */
             --glass-bg: rgba(255, 255, 255, 0.45);
             --glass-border: rgba(255, 255, 255, 0.7);
             --glass-blur: blur(24px) saturate(160%);
-            
-            /* Clay UI Variables (Shadows use deep blue tint, NO black) */
-            --clay-shadow: 0 8px 32px rgba(30, 30, 56, 0.05), inset 0 -4px 12px rgba(30, 30, 56, 0.04), inset 0 4px 10px rgba(255,255,255,0.8);
-            --clay-hover: 0 14px 44px rgba(30, 30, 56, 0.09), inset 0 -6px 16px rgba(30, 30, 56, 0.05), inset 0 6px 12px rgba(255,255,255,0.9);
-            
-            /* Realistic Texture Variables */
-            --real-shadow: 0 2px 4px rgba(30, 30, 56, 0.1), 0 8px 24px rgba(30, 30, 56, 0.1), inset 0 1px 1px rgba(255,255,255,0.6);
+            --clay-shadow: 0 8px 32px rgba(30, 30, 56, 0.05), inset 0 -4px 12px rgba(30, 30, 56, 0.04), inset 0 4px 10px rgba(255, 255, 255, 0.8);
+            --clay-hover: 0 14px 44px rgba(30, 30, 56, 0.09), inset 0 -6px 16px rgba(30, 30, 56, 0.05), inset 0 6px 12px rgba(255, 255, 255, 0.9);
+            --real-shadow: 0 2px 4px rgba(30, 30, 56, 0.1), 0 8px 24px rgba(30, 30, 56, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.6);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg);
@@ -46,340 +47,1061 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Scrollbar styling */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f8; }
-        ::-webkit-scrollbar-thumb { background: #a5a5c0; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #8a8aa8; }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a5a5c0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8a8aa8;
+        }
 
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        .mono { font-family: 'Fira Code', monospace; }
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+        }
+        .mono {
+            font-family: 'Fira Code', monospace;
+        }
 
-        /* Animations */
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-15px) rotate(1.5deg); }
-            66% { transform: translateY(-5px) rotate(-1deg); }
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-15px) rotate(1.5deg);
+            }
+            66% {
+                transform: translateY(-5px) rotate(-1deg);
+            }
         }
         @keyframes dropletRipple {
-            0% { transform: scale(1); opacity: 0.6; }
-            100% { transform: scale(2.2); opacity: 0; }
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(2.2);
+                opacity: 0;
+            }
         }
         @keyframes shimmerText {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
         }
         @keyframes spinSlow {
-            100% { transform: rotate(360deg); }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .reveal {
-            opacity: 0; transform: translateY(40px);
+            opacity: 0;
+            transform: translateY(40px);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .d-1 { transition-delay: 0.1s; } .d-2 { transition-delay: 0.2s; } .d-3 { transition-delay: 0.3s; }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .d-1 {
+            transition-delay: 0.1s;
+        }
+        .d-2 {
+            transition-delay: 0.2s;
+        }
+        .d-3 {
+            transition-delay: 0.3s;
+        }
 
-        /* Navbar Design */
+        /* ---------- NAVIGATION ---------- */
         .navbar {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 1200px; z-index: 1000;
-            background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border); border-radius: 50px;
-            padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 4px 24px rgba(30,30,56,0.05); transition: all 0.3s;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 24px rgba(30, 30, 56, 0.05);
+            transition: all 0.3s;
+            flex-wrap: nowrap;
+            gap: 12px;
         }
-        .navbar.scrolled { background: rgba(255,255,255,0.9); box-shadow: 0 8px 32px rgba(30,30,56,0.08); }
-        
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px rgba(30, 30, 56, 0.08);
+        }
+
         .nav-brand {
-            font-size: 1.4rem; font-weight: 800; color: var(--text-main); text-decoration: none;
-            display: flex; align-items: center; gap: 10px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
         }
-        .nav-brand img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 10px rgba(91,95,239,0.3); }
-        
-        .nav-links { display: flex; gap: 8px; list-style: none; align-items: center; }
+        .nav-brand img {
+            width: clamp(32px, 5vw, 44px);
+            height: auto;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 12px rgba(91, 95, 239, 0.35);
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            list-style: none;
+            align-items: center;
+            flex-shrink: 0;
+        }
         .nav-links a {
-            text-decoration: none; color: #3a3a5a; font-weight: 600; font-size: 0.95rem;
-            padding: 8px 16px; border-radius: 30px; transition: 0.3s;
+            text-decoration: none;
+            color: #3a3a5a;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 14px;
+            border-radius: 30px;
+            transition: 0.3s;
+            white-space: nowrap;
         }
-        .nav-links a:hover { background: rgba(91,95,239,0.1); color: var(--accent); }
-        
+        .nav-links a:hover {
+            background: rgba(91, 95, 239, 0.1);
+            color: var(--accent);
+        }
+
         .btn-donate-nav {
-            background: var(--accent); color: white !important;
-            box-shadow: 0 4px 15px rgba(91,95,239,0.3); border-radius: 30px; padding: 8px 20px; text-decoration: none; font-weight: 600;
+            background: var(--accent);
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(91, 95, 239, 0.3);
+            border-radius: 30px;
+            padding: 8px 20px;
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 0.9rem;
         }
-        .btn-donate-nav:hover { background: var(--accent-glow); transform: translateY(-2px); }
+        .btn-donate-nav:hover {
+            background: var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Language Toggle */
+        .lang-toggle-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .lang-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(30, 30, 56, 0.12);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .lang-toggle-btn:hover {
+            background: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 4px 15px rgba(91, 95, 239, 0.1);
+        }
+        .lang-toggle-btn i {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+        .lang-dropdown {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(30, 30, 56, 0.15);
+            border: 1px solid rgba(30, 30, 56, 0.08);
+            min-width: 160px;
+            overflow: hidden;
+            z-index: 1100;
+            display: none;
+            flex-direction: column;
+            padding: 6px 0;
+        }
+        .lang-dropdown.open {
+            display: flex;
+        }
+        .lang-option {
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+        }
+        .lang-option:hover {
+            background: rgba(91, 95, 239, 0.08);
+            color: var(--accent);
+        }
+        .lang-option.active {
+            color: var(--accent);
+            background: rgba(91, 95, 239, 0.05);
+        }
+        .lang-option .lang-flag {
+            font-size: 1rem;
+        }
 
         .menu-btn {
-            display: none; background: none; border: none; font-size: 1.5rem; 
-            color: var(--text-main); cursor: pointer; padding: 5px 10px;
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 5px 10px;
+            flex-shrink: 0;
         }
-        
-        /* Drawer for Mobile */
+
+        /* ---------- MOBILE DRAWER ---------- */
         .side-drawer {
-            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px);
-            border-left: 1px solid rgba(255,255,255,0.9); z-index: 1001;
-            box-shadow: -10px 0 40px rgba(30,30,56,0.1);
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            z-index: 1001;
+            box-shadow: -10px 0 40px rgba(30, 30, 56, 0.1);
             transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: flex; flex-direction: column; padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
         }
-        .side-drawer.open { right: 0; }
+        .side-drawer.open {
+            right: 0;
+        }
         .drawer-close {
-            align-self: flex-end; background: none; border: none; font-size: 1.8rem;
-            color: #3a3a5a; cursor: pointer; margin-bottom: 20px;
+            align-self: flex-end;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #3a3a5a;
+            cursor: pointer;
+            margin-bottom: 20px;
         }
-        .drawer-links { display: flex; flex-direction: column; gap: 15px; }
+        .drawer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
         .drawer-links a {
-            text-decoration: none; color: var(--text-main); font-size: 1.1rem; font-weight: 600;
-            padding: 12px 20px; border-radius: 12px; background: rgba(30,30,56,0.03);
-            display: flex; align-items: center; gap: 12px; transition: 0.3s;
-        }
-        .drawer-links a i { color: var(--accent); width: 20px; text-align: center; }
-        .drawer-links a:hover { background: rgba(91,95,239,0.1); color: var(--accent); transform: translateX(5px); }
-        .drawer-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(30,30,56,0.2); backdrop-filter: blur(5px);
-            z-index: 1000; display: none; opacity: 0; transition: 0.3s;
-        }
-        .drawer-overlay.active { display: block; opacity: 1; }
-
-        /* Hero Section */
-        .hero {
-            position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            padding: 150px 20px 80px; text-align: center; overflow: hidden;
-            background: radial-gradient(circle at 50% -20%, #f4f5ff 0%, #ffffff 70%);
-        }
-        .orb { position: absolute; border-radius: 50%; filter: blur(60px); z-index: 0; animation: spinSlow 20s linear infinite; }
-        .orb-1 { width: 400px; height: 400px; background: rgba(91,95,239,0.15); top: -100px; left: -100px; }
-        .orb-2 { width: 500px; height: 500px; background: rgba(236,72,153,0.1); bottom: -150px; right: -150px; animation-direction: reverse; }
-
-        .hero-content { position: relative; z-index: 2; max-width: 900px; }
-        
-        .liquid-container { position: relative; width: 180px; height: 180px; margin: 0 auto 40px; animation: float 6s ease-in-out infinite; }
-        .liquid-droplet {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.9) 0%, rgba(200,215,255,0.6) 40%, rgba(150,180,255,0.3) 80%);
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            box-shadow: inset 0 -10px 30px rgba(91,95,239,0.2), inset 0 5px 20px rgba(255,255,255,0.9), 0 15px 35px rgba(91,95,239,0.15);
-            display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.6);
-            overflow: hidden; z-index: 2;
-        }
-        .liquid-droplet img { width: 100px; height: 100px; object-fit: contain; z-index: 3; filter: drop-shadow(0 4px 6px rgba(30,30,56,0.15)); }
-        .liquid-reflection {
-            position: absolute; top: 15%; left: 20%; width: 40px; height: 20px;
-            background: rgba(255,255,255,0.8); border-radius: 50%; transform: rotate(-30deg);
-            filter: blur(2px); z-index: 4;
-        }
-        .liquid-ripple {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            border: 2px solid rgba(91,95,239,0.3); z-index: 1;
-            animation: dropletRipple 3s ease-out infinite;
-        }
-        .liquid-ripple:nth-child(3) { animation-delay: 1s; }
-        .liquid-ripple:nth-child(4) { animation-delay: 2s; }
-
-        .badges-wrap { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-        .badge {
-            display: inline-flex; align-items: center; padding: 8px 16px; background: var(--glass-bg);
-            border: 1px solid var(--glass-border); border-radius: 30px;
-            font-size: 0.85rem; font-weight: 700; color: var(--text-muted);
-            box-shadow: 0 4px 15px rgba(30,30,56,0.05); backdrop-filter: blur(10px);
-        }
-        .badge i { color: var(--accent); margin-right: 6px; }
-
-        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px; color: var(--text-main); letter-spacing: -1px; }
-        .hero h1 span {
-            background: linear-gradient(135deg, #5b5fef, #ec4899, #f97316, #5b5fef);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-size: 200% auto; animation: shimmerText 4s linear infinite;
-        }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 30px; }
-        .hero .creator { font-size: 1rem; font-weight: 600; color: #6a6a8a; margin-bottom: 40px; }
-        .hero .creator span { color: var(--accent); }
-
-        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        .btn {
-            padding: 14px 30px; border-radius: 50px; font-weight: 600; font-size: 1rem;
-            text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-            transition: all 0.3s; border: none; font-family: 'Inter'; cursor: pointer;
-        }
-        .btn-dark { background: #2a2a4a; color: white; box-shadow: 0 10px 20px rgba(42,42,74,0.2); }
-        .btn-dark:hover { background: #3d3d6b; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(42,42,74,0.3); }
-        .btn-glass { background: rgba(255,255,255,0.7); color: var(--text-main); border: 1px solid rgba(30,30,56,0.1); box-shadow: 0 4px 15px rgba(30,30,56,0.05); backdrop-filter: blur(10px); }
-        .btn-glass:hover { background: #fff; transform: translateY(-3px); border-color: rgba(30,30,56,0.2); }
-
-        /* Sections General */
-        .section { padding: 100px 20px; position: relative; z-index: 2; }
-        .section-alt { background: #f8fafc; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .sec-label { font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; display: block; }
-        .sec-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 20px; color: var(--text-main); letter-spacing: -0.5px; }
-        .sec-desc { font-size: 1.1rem; color: var(--text-muted); max-width: 650px; margin-bottom: 50px; }
-        .text-center { text-align: center; }
-        .text-center .sec-desc { margin-left: auto; margin-right: auto; }
-
-        /* Component 1 (Glass) */
-        .glass-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .glass-card {
-            background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border); border-radius: 24px; padding: 35px 30px;
-            box-shadow: 0 8px 32px rgba(30,30,56,0.03); transition: all 0.4s ease;
-            position: relative; overflow: hidden;
-        }
-        .glass-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(91,95,239,0.1); border-color: #fff; }
-        .glass-icon { font-size: 2rem; margin-bottom: 20px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-main); }
-        .glass-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
-
-        /* Component 2 (Clay) */
-        .clay-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .clay-card {
-            background: #ffffff; border-radius: 30px; padding: 40px 30px;
-            box-shadow: var(--clay-shadow); transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            text-align: center; border: 1px solid rgba(30,30,56,0.02);
-        }
-        .clay-card:hover { box-shadow: var(--clay-hover); transform: translateY(-8px); }
-        .clay-icon-wrap {
-            width: 70px; height: 70px; margin: 0 auto 20px; border-radius: 22px;
-            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
-            box-shadow: inset 0 2px 6px rgba(255,255,255,0.8), 0 8px 20px rgba(30,30,56,0.08);
-        }
-        .clay-pink .clay-icon-wrap { background: #fdf2f8; color: #db2777; }
-        .clay-mint .clay-icon-wrap { background: #ecfdf5; color: #059669; }
-        .clay-lave .clay-icon-wrap { background: #f5f3ff; color: #6d28d9; }
-        .clay-sky .clay-icon-wrap { background: #eff6ff; color: #2563eb; }
-        .clay-orng .clay-icon-wrap { background: #fff7ed; color: #ea580c; }
-        .clay-slate .clay-icon-wrap { background: #f8fafc; color: #475569; }
-        .clay-card h3 { font-size: 1.25rem; margin-bottom: 12px; color: var(--text-main); }
-        .clay-card p { font-size: 0.95rem; color: var(--text-muted); }
-
-        /* Component 3 (Real Textures) */
-        .real-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; }
-        .real-card {
-            border-radius: 20px; padding: 40px 30px; position: relative; overflow: hidden;
-            box-shadow: var(--real-shadow); transition: 0.3s;
-        }
-        .real-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(30,30,56,0.15), inset 0 1px 1px rgba(255,255,255,0.8); }
-        
-        .rc-style-1 {
-            background: repeating-linear-gradient(2deg, #f3ebda 0px, #eee2cc 3px, #e9ddc5 4px, #f3ebda 7px), radial-gradient(circle, #fbf7ef, #e4d3b6);
-            background-blend-mode: multiply; border: 1px solid #d4c2a3; color: #4a3b26;
-        }
-        .rc-style-1 h3 { color: #362917; text-shadow: 0 1px 0 rgba(255,255,255,0.6); font-weight: 800; font-size: 1.4rem; margin-bottom: 15px;}
-        
-        .rc-style-2 {
-            background: linear-gradient(160deg, #f8f9fa 0%, #e9ecef 25%, #dee2e6 50%, #ced4da 75%, #f1f3f5 100%);
-            border: 1px solid #adb5bd; box-shadow: var(--real-shadow), inset 0 -2px 5px rgba(30,30,56,0.05);
-        }
-        .rc-style-2 h3 { color: #343a40; text-shadow: 0 1px 1px #fff; font-weight: 800; font-size: 1.4rem; margin-bottom: 15px;}
-        
-        .rc-style-3 {
-            /* Deep maroon/brown, entirely free of #000 */
-            background: radial-gradient(circle at 50% 30%, #594444, #3a2a2a);
-            border: 1px solid #2d1f1f; color: #f5ece2;
-            box-shadow: 0 15px 35px rgba(30,30,56,0.3), inset 0 1px 1px rgba(255,255,255,0.15);
-        }
-        .rc-style-3 h3 { color: #ffffff; font-weight: 800; font-size: 1.4rem; margin-bottom: 15px; }
-        .rc-style-3 p { color: #e4d5c7; }
-        
-        .rc-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
-        .rc-style-1 .rc-icon { color: #765d3d; } .rc-style-2 .rc-icon { color: #6c757d; } .rc-style-3 .rc-icon { color: #e4d5c7; }
-        .rc-stitch { position: absolute; bottom: 15px; right: 20px; font-size: 0.75rem; letter-spacing: 2px; opacity: 0.6; text-transform: uppercase; font-weight: 700; }
-
-        /* Code Block with Clipboard */
-        .code-container {
-            position: relative; max-width: 800px; margin: 40px auto 0;
-        }
-        .code-block {
-            background: #1e1e38; color: #cdd6f4; padding: 25px 20px; border-radius: 16px;
-            font-family: 'Fira Code', monospace; font-size: 0.95rem; text-align: left;
-            overflow-x: auto; box-shadow: inset 0 2px 10px rgba(30,30,56,0.4);
-            border: 1px solid #3d3d6b; line-height: 1.6;
-        }
-        .code-block span.cmd { color: #a6e3a1; }
-        .code-block span.cmt { color: #8a8aa8; }
-        .code-block span.prmpt { color: #f9e2af; }
-        
-        /* Clipboard Buttons */
-        .copy-btn {
-            position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            color: #fff; padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-family: 'Inter'; font-weight: 600;
-            cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 6px;
-            backdrop-filter: blur(5px);
-        }
-        .copy-btn:hover { background: var(--accent); border-color: var(--accent); }
-
-        /* Vault Section (No Black, Rich Deep Indigo instead) */
-        .vault-bg { 
-            background: radial-gradient(circle at center, #312e81 0%, #1e1b4b 100%); 
-            color: white; position: relative; 
-        }
-        .vault-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; position: relative; z-index: 2; }
-        
-        .vault-card {
-            background: linear-gradient(145deg, #3730a3, #2e268a); border: 2px solid #4338ca;
-            border-radius: 16px; padding: 30px; position: relative;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.05), 0 10px 30px rgba(30,27,75,0.5);
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: rgba(30, 30, 56, 0.03);
+            display: flex;
+            align-items: center;
+            gap: 12px;
             transition: 0.3s;
         }
-        .vault-card:hover { transform: translateY(-5px); border-color: #6366f1; }
-        .screw { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #6366f1; box-shadow: inset 0 1px 2px #a5b4fc, inset 0 -1px 2px #312e81; }
-        .tl { top: 15px; left: 15px; } .tr { top: 15px; right: 15px; } .bl { bottom: 15px; left: 15px; } .br { bottom: 15px; right: 15px; }
-        
-        .v-title { display: flex; align-items: center; gap: 10px; font-family: 'Outfit'; font-size: 1.2rem; font-weight: 700; color: #e0e7ff; margin-bottom: 15px; }
-        .address-box { position: relative; margin-bottom: 10px; }
+        .drawer-links a i {
+            color: var(--accent);
+            width: 20px;
+            text-align: center;
+        }
+        .drawer-links a:hover {
+            background: rgba(91, 95, 239, 0.1);
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 30, 56, 0.2);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .drawer-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 150px 20px 80px;
+            text-align: center;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% -20%, #f4f5ff 0%, #ffffff 70%);
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            animation: spinSlow 20s linear infinite;
+        }
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(91, 95, 239, 0.15);
+            top: -100px;
+            left: -100px;
+        }
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(236, 72, 153, 0.1);
+            bottom: -150px;
+            right: -150px;
+            animation-direction: reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .liquid-container {
+            position: relative;
+            width: clamp(130px, 20vw, 180px);
+            height: clamp(130px, 20vw, 180px);
+            margin: 0 auto 40px;
+            animation: float 6s ease-in-out infinite;
+        }
+        .liquid-droplet {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(200, 215, 255, 0.6) 40%, rgba(150, 180, 255, 0.3) 80%);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            box-shadow: inset 0 -10px 30px rgba(91, 95, 239, 0.2), inset 0 5px 20px rgba(255, 255, 255, 0.9), 0 15px 35px rgba(91, 95, 239, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            overflow: hidden;
+            z-index: 2;
+        }
+        .liquid-droplet img {
+            width: 60%;
+            height: 60%;
+            object-fit: contain;
+            z-index: 3;
+            filter: drop-shadow(0 4px 6px rgba(30, 30, 56, 0.15));
+        }
+        .liquid-reflection {
+            position: absolute;
+            top: 15%;
+            left: 20%;
+            width: 40px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+            filter: blur(2px);
+            z-index: 4;
+        }
+        .liquid-ripple {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            border: 2px solid rgba(91, 95, 239, 0.3);
+            z-index: 1;
+            animation: dropletRipple 3s ease-out infinite;
+        }
+        .liquid-ripple:nth-child(3) {
+            animation-delay: 1s;
+        }
+        .liquid-ripple:nth-child(4) {
+            animation-delay: 2s;
+        }
+
+        .badges-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            box-shadow: 0 4px 15px rgba(30, 30, 56, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        .badge i {
+            color: var(--accent);
+            margin-right: 6px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--text-main);
+            letter-spacing: -1px;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, #5b5fef, #ec4899, #f97316, #5b5fef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shimmerText 4s linear infinite;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 30px;
+        }
+        .hero .creator {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #6a6a8a;
+            margin-bottom: 40px;
+        }
+        .hero .creator span {
+            color: var(--accent);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Inter';
+            cursor: pointer;
+        }
+        .btn-dark {
+            background: #2a2a4a;
+            color: white;
+            box-shadow: 0 10px 20px rgba(42, 42, 74, 0.2);
+        }
+        .btn-dark:hover {
+            background: #3d3d6b;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(42, 42, 74, 0.3);
+        }
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text-main);
+            border: 1px solid rgba(30, 30, 56, 0.1);
+            box-shadow: 0 4px 15px rgba(30, 30, 56, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        .btn-glass:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            border-color: rgba(30, 30, 56, 0.2);
+        }
+
+        /* ---------- SECTIONS ---------- */
+        .section {
+            padding: 80px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .section-alt {
+            background: #f8fafc;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .sec-label {
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .sec-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+        .sec-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 50px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-center .sec-desc {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .glass-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 35px 25px;
+            box-shadow: 0 8px 32px rgba(30, 30, 56, 0.03);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(91, 95, 239, 0.1);
+            border-color: #fff;
+        }
+        .glass-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+        .glass-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .clay-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .clay-card {
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 40px 25px;
+            box-shadow: var(--clay-shadow);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-align: center;
+            border: 1px solid rgba(30, 30, 56, 0.02);
+        }
+        .clay-card:hover {
+            box-shadow: var(--clay-hover);
+            transform: translateY(-8px);
+        }
+        .clay-icon-wrap {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.8), 0 8px 20px rgba(30, 30, 56, 0.08);
+        }
+        .clay-pink .clay-icon-wrap {
+            background: #fdf2f8;
+            color: #db2777;
+        }
+        .clay-mint .clay-icon-wrap {
+            background: #ecfdf5;
+            color: #059669;
+        }
+        .clay-lave .clay-icon-wrap {
+            background: #f5f3ff;
+            color: #6d28d9;
+        }
+        .clay-sky .clay-icon-wrap {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        .clay-orng .clay-icon-wrap {
+            background: #fff7ed;
+            color: #ea580c;
+        }
+        .clay-slate .clay-icon-wrap {
+            background: #f8fafc;
+            color: #475569;
+        }
+        .clay-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+        .clay-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .real-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+        .real-card {
+            border-radius: 20px;
+            padding: 40px 25px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--real-shadow);
+            transition: 0.3s;
+        }
+        .real-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(30, 30, 56, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+        }
+
+        .rc-style-1 {
+            background: repeating-linear-gradient(2deg, #f3ebda 0px, #eee2cc 3px, #e9ddc5 4px, #f3ebda 7px), radial-gradient(circle, #fbf7ef, #e4d3b6);
+            background-blend-mode: multiply;
+            border: 1px solid #d4c2a3;
+            color: #4a3b26;
+        }
+        .rc-style-1 h3 {
+            color: #362917;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .rc-style-2 {
+            background: linear-gradient(160deg, #f8f9fa 0%, #e9ecef 25%, #dee2e6 50%, #ced4da 75%, #f1f3f5 100%);
+            border: 1px solid #adb5bd;
+            box-shadow: var(--real-shadow), inset 0 -2px 5px rgba(30, 30, 56, 0.05);
+        }
+        .rc-style-2 h3 {
+            color: #343a40;
+            text-shadow: 0 1px 1px #fff;
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .rc-style-3 {
+            background: radial-gradient(circle at 50% 30%, #594444, #3a2a2a);
+            border: 1px solid #2d1f1f;
+            color: #f5ece2;
+            box-shadow: 0 15px 35px rgba(30, 30, 56, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        }
+        .rc-style-3 h3 {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        .rc-style-3 p {
+            color: #e4d5c7;
+        }
+
+        .rc-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .rc-style-1 .rc-icon {
+            color: #765d3d;
+        }
+        .rc-style-2 .rc-icon {
+            color: #6c757d;
+        }
+        .rc-style-3 .rc-icon {
+            color: #e4d5c7;
+        }
+        .rc-stitch {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .code-container {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+        .code-block {
+            background: #1e1e38;
+            color: #cdd6f4;
+            padding: 25px 20px;
+            border-radius: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            text-align: left;
+            overflow-x: auto;
+            box-shadow: inset 0 2px 10px rgba(30, 30, 56, 0.4);
+            border: 1px solid #3d3d6b;
+            line-height: 1.6;
+        }
+        .code-block span.cmd {
+            color: #a6e3a1;
+        }
+        .code-block span.cmt {
+            color: #8a8aa8;
+        }
+        .code-block span.prmpt {
+            color: #f9e2af;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-family: 'Inter';
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(5px);
+        }
+        .copy-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .vault-bg {
+            background: radial-gradient(circle at center, #312e81 0%, #1e1b4b 100%);
+            color: white;
+            position: relative;
+        }
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .vault-card {
+            background: linear-gradient(145deg, #3730a3, #2e268a);
+            border: 2px solid #4338ca;
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.05), 0 10px 30px rgba(30, 27, 75, 0.5);
+            transition: 0.3s;
+        }
+        .vault-card:hover {
+            transform: translateY(-5px);
+            border-color: #6366f1;
+        }
+        .screw {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #6366f1;
+            box-shadow: inset 0 1px 2px #a5b4fc, inset 0 -1px 2px #312e81;
+        }
+        .tl {
+            top: 15px;
+            left: 15px;
+        }
+        .tr {
+            top: 15px;
+            right: 15px;
+        }
+        .bl {
+            bottom: 15px;
+            left: 15px;
+        }
+        .br {
+            bottom: 15px;
+            right: 15px;
+        }
+
+        .v-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Outfit';
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #e0e7ff;
+            margin-bottom: 15px;
+        }
+        .address-box {
+            position: relative;
+            margin-bottom: 10px;
+        }
         .v-address {
-            background: #1e1b4b; padding: 15px; border-radius: 8px; border: 1px solid #312e81;
-            font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #34d399;
-            word-break: break-all; box-shadow: inset 0 3px 10px rgba(30,27,75,0.6);
-            display: block; padding-right: 45px;
+            background: #1e1b4b;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #312e81;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #34d399;
+            word-break: break-all;
+            box-shadow: inset 0 3px 10px rgba(30, 27, 75, 0.6);
+            display: block;
+            padding-right: 45px;
         }
         .mini-copy {
-            position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-            background: #3730a3; color: #fff; border: none; padding: 6px; border-radius: 6px;
-            cursor: pointer; transition: 0.2s; font-size: 0.9rem;
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3730a3;
+            color: #fff;
+            border: none;
+            padding: 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
         }
-        .mini-copy:hover { background: var(--accent); }
+        .mini-copy:hover {
+            background: var(--accent);
+        }
 
-        /* Community Section */
         .founder-card {
-            background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border); border-radius: 30px; padding: 50px;
-            max-width: 900px; margin: 0 auto; text-align: center; box-shadow: 0 10px 40px rgba(30,30,56,0.05);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 50px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(30, 30, 56, 0.05);
         }
-        .founder-img { width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 20px; object-fit: cover; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(30,30,56,0.1); }
-        .quote { font-size: 1.2rem; font-style: italic; color: var(--text-muted); margin-bottom: 30px; line-height: 1.8; position: relative; }
-        .quote::before { content: '"'; font-size: 3rem; color: var(--accent); opacity: 0.3; position: absolute; top: -10px; left: -20px; font-family: serif; }
-        .founder-name { font-family: 'Outfit'; font-size: 1.5rem; font-weight: 800; color: var(--text-main); }
-        .founder-loc { font-size: 0.95rem; font-weight: 600; color: #10b981; margin-bottom: 30px; }
+        .founder-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 5px 15px rgba(30, 30, 56, 0.1);
+        }
+        .quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.8;
+            position: relative;
+        }
+        .quote::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: -20px;
+            font-family: serif;
+        }
+        .founder-name {
+            font-family: 'Outfit';
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+        .founder-loc {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 30px;
+        }
 
-        .social-flex { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .social-flex {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
         .soc-btn {
-            display: flex; align-items: center; gap: 10px; padding: 12px 25px; border-radius: 30px;
-            background: #fff; color: var(--text-main); font-weight: 600; text-decoration: none;
-            box-shadow: var(--clay-shadow); transition: 0.3s; border: 1px solid #f1f1f8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: #fff;
+            color: var(--text-main);
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: var(--clay-shadow);
+            transition: 0.3s;
+            border: 1px solid #f1f1f8;
         }
-        .soc-btn:hover { transform: translateY(-3px); box-shadow: var(--clay-hover); }
-        .soc-btn i { font-size: 1.2rem; }
-        .c-fb { color: #1877F2; } .c-tg { color: #229ED9; } .c-em { color: #ea4335; } .c-gh { color: #1e1e38; }
+        .soc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--clay-hover);
+        }
+        .soc-btn i {
+            font-size: 1.2rem;
+        }
+        .c-fb {
+            color: #1877F2;
+        }
+        .c-tg {
+            color: #229ED9;
+        }
+        .c-em {
+            color: #ea4335;
+        }
+        .c-gh {
+            color: #1e1e38;
+        }
 
-        /* Footer */
-        .footer { padding: 40px 20px; text-align: center; background: #1e1b4b; color: #818cf8; border-top: 1px solid #312e81; }
-        .footer a { color: #c7d2fe; text-decoration: none; font-weight: 600; margin: 0 10px; }
-        .footer a:hover { color: var(--accent); }
+        .footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #1e1b4b;
+            color: #818cf8;
+            border-top: 1px solid #312e81;
+        }
+        .footer a {
+            color: #c7d2fe;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            color: var(--accent);
+        }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links, .btn-donate-nav { display: none; }
-            .menu-btn { display: block; }
-            .hero { padding-top: 120px; }
-            .hero h1 { font-size: 2.2rem; }
-            .liquid-container { width: 140px; height: 140px; }
-            .liquid-droplet img { width: 80px; height: 80px; }
-            .section { padding: 60px 20px; }
-            .founder-card { padding: 30px 20px; }
+        /* ---------- RESPONSIVE BREAKPOINTS ---------- */
+        @media (max-width: 992px) {
+            .nav-links,
+            .btn-donate-nav {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+            .navbar {
+                padding: 8px 16px;
+                gap: 10px;
+            }
+            .nav-brand {
+                font-size: 1.2rem;
+            }
+            .lang-toggle-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .section {
+                padding: 60px 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .lang-toggle-btn span {
+                display: none;
+            }
+            .lang-toggle-btn i {
+                margin: 0;
+            }
+            .hero {
+                padding-top: 130px;
+            }
         }
     </style>
 </head>
@@ -391,17 +1113,32 @@
             <img src="https://i.postimg.cc/G2KGfvGK/20260601-200059.png" alt="ManusClaw Logo">
             ManusClaw
         </a>
-        
+
         <ul class="nav-links">
-            <li><a href="#v5-update">v5.0.0 Features</a></li>
-            <li><a href="#architecture">Architecture</a></li>
-            <li><a href="#tools">14 Core Tools</a></li>
-            <li><a href="#engines">Engines</a></li>
-            <li><a href="#modes">Deploy Modes</a></li>
+            <li><a href="#v5-update" data-i18n="nav_v5">v5.0.0 Features</a></li>
+            <li><a href="#architecture" data-i18n="nav_arch">Architecture</a></li>
+            <li><a href="#tools" data-i18n="nav_tools">14 Core Tools</a></li>
+            <li><a href="#engines" data-i18n="nav_engines">Engines</a></li>
+            <li><a href="#modes" data-i18n="nav_modes">Deploy Modes</a></li>
         </ul>
-        <a href="#vault" class="btn btn-donate-nav"><i class="fa-solid fa-bolt"></i> Support Us</a>
-        
-        <button class="menu-btn" id="menuBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+
+        <!-- Language Toggle -->
+        <div class="lang-toggle-wrap" id="langToggleWrap">
+            <button class="lang-toggle-btn" id="langToggleBtn" aria-label="Change language">
+                <i class="fa-solid fa-language"></i> <span id="currentLangLabel">English</span> <i class="fa-solid fa-chevron-down" style="font-size:0.7rem;"></i>
+            </button>
+            <div class="lang-dropdown" id="langDropdown">
+                <button class="lang-option active" data-lang="en" data-label="English"><span class="lang-flag">🇬🇧</span> English</button>
+                <button class="lang-option" data-lang="bn" data-label="বাংলা"><span class="lang-flag">🇧🇩</span> বাংলা</button>
+                <button class="lang-option" data-lang="hi" data-label="हिन्दी"><span class="lang-flag">🇮🇳</span> हिन्दी</button>
+                <button class="lang-option" data-lang="zh" data-label="中文"><span class="lang-flag">🇨🇳</span> 中文</button>
+                <button class="lang-option" data-lang="ar" data-label="العربية"><span class="lang-flag">🇸🇦</span> العربية</button>
+            </div>
+        </div>
+
+        <a href="#vault" class="btn btn-donate-nav" data-i18n="support_btn"><i class="fa-solid fa-bolt"></i> Support Us</a>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-ellipsis-vertical"></i></button>
     </nav>
 
     <!-- Mobile Drawer -->
@@ -409,13 +1146,13 @@
     <div class="side-drawer" id="sideDrawer">
         <button class="drawer-close" id="closeDrawer"><i class="fa-solid fa-xmark"></i></button>
         <div class="drawer-links">
-            <a href="#v5-update" class="drawer-link"><i class="fa-solid fa-rocket"></i> v5.0.0 Features</a>
-            <a href="#architecture" class="drawer-link"><i class="fa-solid fa-diagram-project"></i> Architecture</a>
-            <a href="#tools" class="drawer-link"><i class="fa-solid fa-screwdriver-wrench"></i> 14 Core Tools</a>
-            <a href="#engines" class="drawer-link"><i class="fa-solid fa-gears"></i> Internal Engines</a>
-            <a href="#modes" class="drawer-link"><i class="fa-solid fa-server"></i> Deploy Modes</a>
-            <a href="#community" class="drawer-link"><i class="fa-solid fa-users"></i> Community</a>
-            <a href="#vault" class="drawer-link" style="background: var(--accent); color: white;"><i class="fa-solid fa-vault"></i> Support Vault</a>
+            <a href="#v5-update" class="drawer-link" data-i18n="drawer_v5"><i class="fa-solid fa-rocket"></i> v5.0.0 Features</a>
+            <a href="#architecture" class="drawer-link" data-i18n="drawer_arch"><i class="fa-solid fa-diagram-project"></i> Architecture</a>
+            <a href="#tools" class="drawer-link" data-i18n="drawer_tools"><i class="fa-solid fa-screwdriver-wrench"></i> 14 Core Tools</a>
+            <a href="#engines" class="drawer-link" data-i18n="drawer_engines"><i class="fa-solid fa-gears"></i> Internal Engines</a>
+            <a href="#modes" class="drawer-link" data-i18n="drawer_modes"><i class="fa-solid fa-server"></i> Deploy Modes</a>
+            <a href="#community" class="drawer-link" data-i18n="drawer_community"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="#vault" class="drawer-link" style="background: var(--accent); color: white;" data-i18n="drawer_vault"><i class="fa-solid fa-vault"></i> Support Vault</a>
         </div>
     </div>
 
@@ -424,7 +1161,7 @@
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="hero-content reveal">
-            
+
             <div class="liquid-container">
                 <div class="liquid-droplet">
                     <img src="https://i.postimg.cc/G2KGfvGK/20260601-200059.png" alt="ManusClaw Agent">
@@ -433,20 +1170,20 @@
                 <div class="liquid-ripple"></div>
                 <div class="liquid-ripple"></div>
             </div>
-            
+
             <div class="badges-wrap">
-                <div class="badge"><i class="fa-solid fa-robot"></i> v5.0.0 Framework</div>
-                <div class="badge"><i class="fa-solid fa-message"></i> 12+ Channels</div>
-                <div class="badge"><i class="fa-solid fa-microphone"></i> Voice & Canvas</div>
+                <div class="badge"><i class="fa-solid fa-robot"></i> <span data-i18n="badge_framework">v5.0.0 Framework</span></div>
+                <div class="badge"><i class="fa-solid fa-message"></i> <span data-i18n="badge_channels">12+ Channels</span></div>
+                <div class="badge"><i class="fa-solid fa-microphone"></i> <span data-i18n="badge_voice">Voice & Canvas</span></div>
             </div>
-            
-            <h1>Bangladesh's First Ultimate <br><span>Autonomous AI Framework</span></h1>
-            <p>Unleash self-reasoning CLI beasts to execute code, browse the web, and dominate tasks — across 12+ messaging channels, with voice wake, live canvas A2UI, and multi-agent routing.</p>
-            <div class="creator">Built from <span>Bangladesh</span>🇧🇩</div>
-            
+
+            <h1 data-i18n="hero_title">Bangladesh's First Ultimate <br><span>Autonomous AI Framework</span></h1>
+            <p data-i18n="hero_desc">Unleash self-reasoning CLI beasts to execute code, browse the web, and dominate tasks — across 12+ messaging channels, with voice wake, live canvas A2UI, and multi-agent routing.</p>
+            <div class="creator"><span data-i18n="hero_built">Built from</span> <span>Bangladesh</span>🇧🇩</div>
+
             <div class="btn-group">
-                <a href="https://github.com/ManusAgents/ManusClaw" target="_blank" class="btn btn-dark"><i class="fa-brands fa-github"></i> Core Repository</a>
-                <a href="https://github.com/The-JDdev/manusclaw-setup" target="_blank" class="btn btn-glass"><i class="fa-solid fa-terminal"></i> Get Setup Script</a>
+                <a href="https://github.com/ManusAgents/ManusClaw" target="_blank" class="btn btn-dark"><i class="fa-brands fa-github"></i> <span data-i18n="btn_core_repo">Core Repository</span></a>
+                <a href="https://github.com/The-JDdev/manusclaw-setup" target="_blank" class="btn btn-glass"><i class="fa-solid fa-terminal"></i> <span data-i18n="btn_setup_script">Get Setup Script</span></a>
             </div>
         </div>
     </section>
@@ -455,30 +1192,30 @@
     <section class="section section-alt" id="v5-update">
         <div class="container">
             <div class="text-center">
-                <span class="sec-label"><i class="fa-solid fa-bolt"></i> Massive Evolution</span>
-                <h2 class="sec-title">What's New in v5.0.0?</h2>
-                <p class="sec-desc">ManusClaw is no longer just a chatbot wrapper. It has evolved into a true omnichannel AI platform.</p>
+                <span class="sec-label"><i class="fa-solid fa-bolt"></i> <span data-i18n="sec_v5_label">Massive Evolution</span></span>
+                <h2 class="sec-title" data-i18n="sec_v5_title">What's New in v5.0.0?</h2>
+                <p class="sec-desc" data-i18n="sec_v5_desc">ManusClaw is no longer just a chatbot wrapper. It has evolved into a true omnichannel AI platform.</p>
             </div>
             <div class="glass-grid">
                 <div class="glass-card reveal d-1">
                     <div class="glass-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                    <h3>12+ Messaging Channels</h3>
-                    <p>Agents now operate natively across Telegram, Discord, Slack, WhatsApp, Signal, Teams, Matrix, WebChat, and Email with cross-platform routing.</p>
+                    <h3 data-i18n="v5_card1_title">12+ Messaging Channels</h3>
+                    <p data-i18n="v5_card1_desc">Agents now operate natively across Telegram, Discord, Slack, WhatsApp, Signal, Teams, Matrix, WebChat, and Email with cross-platform routing.</p>
                 </div>
                 <div class="glass-card reveal d-2">
                     <div class="glass-icon"><i class="fa-solid fa-microphone-lines"></i></div>
-                    <h3>Voice Wake & Talk Mode</h3>
-                    <p>Includes Porcupine wake-word detection (e.g., "Hey Manus") and a continuous talk loop. Command the agent via microphone and get TTS responses.</p>
+                    <h3 data-i18n="v5_card2_title">Voice Wake & Talk Mode</h3>
+                    <p data-i18n="v5_card2_desc">Includes Porcupine wake-word detection (e.g., "Hey Manus") and a continuous talk loop. Command the agent via microphone and get TTS responses.</p>
                 </div>
                 <div class="glass-card reveal d-3">
                     <div class="glass-icon"><i class="fa-solid fa-palette"></i></div>
-                    <h3>Live Canvas (A2UI)</h3>
-                    <p>Agent-to-UI protocol enabled. Agents can now render real-time UI components, charts, tables, and interactive buttons via WebSockets.</p>
+                    <h3 data-i18n="v5_card3_title">Live Canvas (A2UI)</h3>
+                    <p data-i18n="v5_card3_desc">Agent-to-UI protocol enabled. Agents can now render real-time UI components, charts, tables, and interactive buttons via WebSockets.</p>
                 </div>
                 <div class="glass-card reveal d-1">
                     <div class="glass-icon"><i class="fa-solid fa-network-wired"></i></div>
-                    <h3>Webhooks & Gmail Pub/Sub</h3>
-                    <p>Features HMAC-verified incoming webhooks and Gmail Pub/Sub automation. Agents can handle tasks and auto-replies immediately as emails arrive.</p>
+                    <h3 data-i18n="v5_card4_title">Webhooks & Gmail Pub/Sub</h3>
+                    <p data-i18n="v5_card4_desc">Features HMAC-verified incoming webhooks and Gmail Pub/Sub automation. Agents can handle tasks and auto-replies immediately as emails arrive.</p>
                 </div>
             </div>
         </div>
@@ -487,26 +1224,26 @@
     <!-- Architecture Section -->
     <section class="section" id="architecture">
         <div class="container text-center">
-            <span class="sec-label"><i class="fa-solid fa-brain"></i> System Intelligence</span>
-            <h2 class="sec-title">Multi-Agent Orchestration</h2>
-            <p class="sec-desc">A fully independent DAG pipeline operating on a strict PAORR (Plan -> Act -> Observe -> Reflect -> Retry) execution loop.</p>
-            
+            <span class="sec-label"><i class="fa-solid fa-brain"></i> <span data-i18n="sec_arch_label">System Intelligence</span></span>
+            <h2 class="sec-title" data-i18n="sec_arch_title">Multi-Agent Orchestration</h2>
+            <p class="sec-desc" data-i18n="sec_arch_desc">A fully independent DAG pipeline operating on a strict PAORR (Plan -> Act -> Observe -> Reflect -> Retry) execution loop.</p>
+
             <div class="glass-grid" style="margin-top: 40px;">
                 <div class="glass-card reveal">
-                    <h3>1. Product Manager 📝</h3>
-                    <p>Analyzes task requirements and generates a PRD (Product Requirement Document). Sets clear, measurable goals.</p>
+                    <h3 data-i18n="arch_card1_title">1. Product Manager 📝</h3>
+                    <p data-i18n="arch_card1_desc">Analyzes task requirements and generates a PRD (Product Requirement Document). Sets clear, measurable goals.</p>
                 </div>
                 <div class="glass-card reveal d-1">
-                    <h3>2. Architect 🏛️</h3>
-                    <p>Plans the software architecture, defines directory trees and the tech stack. Creates a perfect DAG execution plan.</p>
+                    <h3 data-i18n="arch_card2_title">2. Architect 🏛️</h3>
+                    <p data-i18n="arch_card2_desc">Plans the software architecture, defines directory trees and the tech stack. Creates a perfect DAG execution plan.</p>
                 </div>
                 <div class="glass-card reveal d-2">
-                    <h3>3. Engineer (Manus) ⚙️</h3>
-                    <p>Utilizes the 14-tool arsenal to write code, execute it, and autonomously fix errors without human intervention.</p>
+                    <h3 data-i18n="arch_card3_title">3. Engineer (Manus) ⚙️</h3>
+                    <p data-i18n="arch_card3_desc">Utilizes the 14-tool arsenal to write code, execute it, and autonomously fix errors without human intervention.</p>
                 </div>
                 <div class="glass-card reveal d-3">
-                    <h3>4. QA Role 🔬</h3>
-                    <p>Ensures quality assurance by running rigorous tests and validating that everything is production-ready according to the PRD.</p>
+                    <h3 data-i18n="arch_card4_title">4. QA Role 🔬</h3>
+                    <p data-i18n="arch_card4_desc">Ensures quality assurance by running rigorous tests and validating that everything is production-ready according to the PRD.</p>
                 </div>
             </div>
         </div>
@@ -515,40 +1252,40 @@
     <!-- 14 Tools Arsenal -->
     <section class="section section-alt" id="tools">
         <div class="container text-center">
-            <span class="sec-label"><i class="fa-solid fa-cubes-stacked"></i> Lethal Arsenal</span>
-            <h2 class="sec-title">14 Built-in Core Tools</h2>
-            <p class="sec-desc">The agent uses these tools to interact with the real world. Soft shapes hiding industrial power.</p>
-            
+            <span class="sec-label"><i class="fa-solid fa-cubes-stacked"></i> <span data-i18n="sec_tools_label">Lethal Arsenal</span></span>
+            <h2 class="sec-title" data-i18n="sec_tools_title">14 Built-in Core Tools</h2>
+            <p class="sec-desc" data-i18n="sec_tools_desc">The agent uses these tools to interact with the real world. Soft shapes hiding industrial power.</p>
+
             <div class="clay-grid">
                 <div class="clay-card clay-pink reveal">
                     <div class="clay-icon-wrap"><i class="fa-solid fa-terminal"></i></div>
-                    <h3>Persistent Bash</h3>
-                    <p>Stateful shell sessions that remain active in memory. Control the OS natively across tool calls.</p>
+                    <h3 data-i18n="tools_card1_title">Persistent Bash</h3>
+                    <p data-i18n="tools_card1_desc">Stateful shell sessions that remain active in memory. Control the OS natively across tool calls.</p>
                 </div>
                 <div class="clay-card clay-mint reveal d-1">
                     <div class="clay-icon-wrap"><i class="fa-brands fa-python"></i></div>
-                    <h3>Isolated PythonExec</h3>
-                    <p>Executes code in a fresh, isolated multiprocessing sandbox with a strict 2GB memory limit.</p>
+                    <h3 data-i18n="tools_card2_title">Isolated PythonExec</h3>
+                    <p data-i18n="tools_card2_desc">Executes code in a fresh, isolated multiprocessing sandbox with a strict 2GB memory limit.</p>
                 </div>
                 <div class="clay-card clay-lave reveal d-2">
                     <div class="clay-icon-wrap"><i class="fa-solid fa-globe"></i></div>
-                    <h3>BrowserUse Autonomy</h3>
-                    <p>Playwright-driven Chromium automation. Grants the freedom to navigate, click, and extract web data.</p>
+                    <h3 data-i18n="tools_card3_title">BrowserUse Autonomy</h3>
+                    <p data-i18n="tools_card3_desc">Playwright-driven Chromium automation. Grants the freedom to navigate, click, and extract web data.</p>
                 </div>
                 <div class="clay-card clay-sky reveal">
                     <div class="clay-icon-wrap"><i class="fa-solid fa-envelope-open-text"></i></div>
-                    <h3>EmailTool & Gmail</h3>
-                    <p>New addition! The agent can now read, send, and reply in threads autonomously.</p>
+                    <h3 data-i18n="tools_card4_title">EmailTool & Gmail</h3>
+                    <p data-i18n="tools_card4_desc">New addition! The agent can now read, send, and reply in threads autonomously.</p>
                 </div>
                 <div class="clay-card clay-orng reveal d-1">
                     <div class="clay-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3>CanvasTool & DataViz</h3>
-                    <p>Renders live charts, UI components, and interactive elements directly to connected screens.</p>
+                    <h3 data-i18n="tools_card5_title">CanvasTool & DataViz</h3>
+                    <p data-i18n="tools_card5_desc">Renders live charts, UI components, and interactive elements directly to connected screens.</p>
                 </div>
                 <div class="clay-card clay-slate reveal d-2">
                     <div class="clay-icon-wrap"><i class="fa-solid fa-magnifying-glass"></i></div>
-                    <h3>Cross-Session Memory</h3>
-                    <p>SQLite + FTS5 memory integration. Grants the ability to recall past sessions and learn from failures.</p>
+                    <h3 data-i18n="tools_card6_title">Cross-Session Memory</h3>
+                    <p data-i18n="tools_card6_desc">SQLite + FTS5 memory integration. Grants the ability to recall past sessions and learn from failures.</p>
                 </div>
             </div>
         </div>
@@ -557,28 +1294,28 @@
     <!-- Engines / Design Features -->
     <section class="section" id="engines">
         <div class="container text-center">
-            <span class="sec-label"><i class="fa-solid fa-hammer"></i> Internal Engines</span>
-            <h2 class="sec-title">Digital That Feels Real</h2>
-            <p class="sec-desc">The framework's solid logic and robust security systems are represented through these realistic elements.</p>
-            
+            <span class="sec-label"><i class="fa-solid fa-hammer"></i> <span data-i18n="sec_engines_label">Internal Engines</span></span>
+            <h2 class="sec-title" data-i18n="sec_engines_title">Digital That Feels Real</h2>
+            <p class="sec-desc" data-i18n="sec_engines_desc">The framework's solid logic and robust security systems are represented through these realistic elements.</p>
+
             <div class="real-grid" style="margin-top:40px;">
                 <div class="real-card rc-style-1 reveal">
                     <i class="fa-solid fa-clipboard-list rc-icon"></i>
-                    <h3>PAORR & Fallback Logic</h3>
-                    <p>Tools are auto-penalized on failure. Features seamless failover rotation between LLM providers (OpenAI, Groq, Anthropic).</p>
-                    <div class="rc-stitch">━ ━ calculated</div>
+                    <h3 data-i18n="engines_card1_title">PAORR & Fallback Logic</h3>
+                    <p data-i18n="engines_card1_desc">Tools are auto-penalized on failure. Features seamless failover rotation between LLM providers (OpenAI, Groq, Anthropic).</p>
+                    <div class="rc-stitch" data-i18n="engines_card1_stitch">━ ━ calculated</div>
                 </div>
                 <div class="real-card rc-style-2 reveal d-1">
                     <i class="fa-solid fa-shield-halved rc-icon"></i>
-                    <h3>Identity & Permissions</h3>
-                    <p>IdentityGuard stops jailbreaks using 30+ regex patterns. The 3-tier Permission Gate blocks the execution of dangerous commands.</p>
-                    <div class="rc-stitch">◇ ◇ secured</div>
+                    <h3 data-i18n="engines_card2_title">Identity & Permissions</h3>
+                    <p data-i18n="engines_card2_desc">IdentityGuard stops jailbreaks using 30+ regex patterns. The 3-tier Permission Gate blocks the execution of dangerous commands.</p>
+                    <div class="rc-stitch" data-i18n="engines_card2_stitch">◇ ◇ secured</div>
                 </div>
                 <div class="real-card rc-style-3 reveal d-2">
                     <i class="fa-solid fa-database rc-icon"></i>
-                    <h3>Audit Ledger & SQLite</h3>
-                    <p>WAL-mode SQLite logging. Every step, tool call, stdout, and error trace is permanently recorded. Zero data loss.</p>
-                    <div class="rc-stitch">◆ ◆ timeless</div>
+                    <h3 data-i18n="engines_card3_title">Audit Ledger & SQLite</h3>
+                    <p data-i18n="engines_card3_desc">WAL-mode SQLite logging. Every step, tool call, stdout, and error trace is permanently recorded. Zero data loss.</p>
+                    <div class="rc-stitch" data-i18n="engines_card3_stitch">◆ ◆ timeless</div>
                 </div>
             </div>
         </div>
@@ -588,49 +1325,48 @@
     <section class="section section-alt" id="modes">
         <div class="container">
             <div class="text-center">
-                <span class="sec-label"><i class="fa-solid fa-layer-group"></i> Deployment</span>
-                <h2 class="sec-title">Run Anywhere You Want</h2>
-                <p class="sec-desc">ManusClaw can be deployed in any environment, from heavy backend servers to mobile smartphones.</p>
+                <span class="sec-label"><i class="fa-solid fa-layer-group"></i> <span data-i18n="sec_modes_label">Deployment</span></span>
+                <h2 class="sec-title" data-i18n="sec_modes_title">Run Anywhere You Want</h2>
+                <p class="sec-desc" data-i18n="sec_modes_desc">ManusClaw can be deployed in any environment, from heavy backend servers to mobile smartphones.</p>
             </div>
-            
+
             <div class="glass-grid">
                 <div class="glass-card reveal">
                     <div class="glass-icon"><i class="fa-solid fa-terminal"></i></div>
-                    <h3>Standalone CLI</h3>
-                    <p>Wake up the AI shell with the native terminal command <code>manusclaw</code>. Slash commands included.</p>
+                    <h3 data-i18n="modes_card1_title">Standalone CLI</h3>
+                    <p data-i18n="modes_card1_desc">Wake up the AI shell with the native terminal command <code>manusclaw</code>. Slash commands included.</p>
                 </div>
                 <div class="glass-card reveal d-1">
                     <div class="glass-icon"><i class="fa-solid fa-server"></i></div>
-                    <h3>SSH Remote Gateway</h3>
-                    <p>New feature! Runs an asyncssh server on port 2222, providing remote access via a restricted shell.</p>
+                    <h3 data-i18n="modes_card2_title">SSH Remote Gateway</h3>
+                    <p data-i18n="modes_card2_desc">New feature! Runs an asyncssh server on port 2222, providing remote access via a restricted shell.</p>
                 </div>
                 <div class="glass-card reveal d-2">
                     <div class="glass-icon"><i class="fa-solid fa-desktop"></i></div>
-                    <h3>Desktop & Windows Hub</h3>
-                    <p>Includes Flet Desktop GUI, macOS Menu Bar, and Windows System Tray companion applications.</p>
+                    <h3 data-i18n="modes_card3_title">Desktop & Windows Hub</h3>
+                    <p data-i18n="modes_card3_desc">Includes Flet Desktop GUI, macOS Menu Bar, and Windows System Tray companion applications.</p>
                 </div>
                 <div class="glass-card reveal d-3">
                     <div class="glass-icon"><i class="fa-brands fa-docker"></i></div>
-                    <h3>3 Sandbox Backends</h3>
-                    <p>Supports Docker, SSH remote host, and OpenShell (Linux namespaces) for secure code isolation.</p>
+                    <h3 data-i18n="modes_card4_title">3 Sandbox Backends</h3>
+                    <p data-i18n="modes_card4_desc">Supports Docker, SSH remote host, and OpenShell (Linux namespaces) for secure code isolation.</p>
                 </div>
             </div>
 
-            <!-- Copy to clipboard enabled Code Block -->
             <div class="code-container reveal">
                 <button class="copy-btn" onclick="copyCode(this, 'setupCode')">
-                    <i class="fa-regular fa-clipboard"></i> Copy
+                    <i class="fa-regular fa-clipboard"></i> <span data-i18n="copy_btn">Copy</span>
                 </button>
                 <div class="code-block" id="setupCode">
-                    <span class="cmt"># Installing ManusClaw v5.0.0 is straightforward</span><br><br>
+                    <span class="cmt" data-i18n="code_comment1"># Installing ManusClaw v5.0.0 is straightforward</span><br><br>
                     <span class="cmd">git clone https://github.com/ManusAgents/ManusClaw.git</span><br>
-                    <span class="cmd">cd manusclaw</span><br>
+                    <span class="cmd">cd ManusClaw</span><br>
                     <span class="cmd">chmod +x install.sh && ./install.sh</span><br><br>
-                    
-                    <span class="cmt"># Run with all v5.0 features (Voice, Channels, UI)</span><br>
+
+                    <span class="cmt" data-i18n="code_comment2"># Run with all v5.0 features (Voice, Channels, UI)</span><br>
                     <span class="cmd">pip install -e ".[all-plus]"</span><br><br>
 
-                    <span class="cmt"># Start the Voice Wake Mode</span><br>
+                    <span class="cmt" data-i18n="code_comment3"># Start the Voice Wake Mode</span><br>
                     <span class="cmd">manusclaw voice wake --start --word "hey manus"</span>
                 </div>
             </div>
@@ -641,41 +1377,41 @@
     <section class="section" id="community">
         <div class="container">
             <div class="founder-card reveal">
-                <img src="https://i.postimg.cc/G2KGfvGK/20260601-200059.png" alt="ManusAgents" class="founder-img" onerror="this.src='https://placehold.co/100x100/5b5fef/ffffff?text=JD'">
-                <p class="quote">If ManusClaw has empowered your workflow, consider supporting its continued development. Every contribution fuels the next evolution of autonomous AI agents.</p>
-                <div class="founder-name">ManusAgents (SHS Shobuj)</div>
-                <div class="founder-loc">Founder & Lead Architect (SHS Lab)</div>
-                
+                <img src="https://i.postimg.cc/G2KGfvGK/20260601-200059.png" alt="ManusClawAI" class="founder-img" onerror="this.src='https://placehold.co/100x100/5b5fef/ffffff?text=JD'">
+                <p class="quote" data-i18n="community_quote">If ManusClaw has empowered your workflow, consider supporting its continued development. Every contribution fuels the next evolution of autonomous AI agents.</p>
+                <div class="founder-name">ManusClawAI (SHS Shobuj)</div>
+                <div class="founder-loc" data-i18n="community_loc">Founder & Lead Architect (SHS Lab)</div>
+
                 <div class="social-flex">
-                    <a href="https://fb.com/itsshsshobuj" target="_blank" class="soc-btn"><i class="fa-brands fa-facebook c-fb"></i> Facebook</a>
-                    <a href="https://t.me/singularityos" target="_blank" class="soc-btn"><i class="fa-brands fa-telegram c-tg"></i> Telegram</a>
-                    <a href="mailto:thejddev.official@gmail.com" class="soc-btn"><i class="fa-solid fa-envelope c-em"></i> Email</a>
-                    <a href="https://github.com/ManusAgents" target="_blank" class="soc-btn"><i class="fa-brands fa-github c-gh"></i> GitHub</a>
+                    <a href="https://fb.com/itsshsshobuj" target="_blank" class="soc-btn"><i class="fa-brands fa-facebook c-fb"></i> <span data-i18n="soc_facebook">Facebook</span></a>
+                    <a href="https://t.me/singularityos" target="_blank" class="soc-btn"><i class="fa-brands fa-telegram c-tg"></i> <span data-i18n="soc_telegram">Telegram</span></a>
+                    <a href="/cdn-cgi/l/email-protection#582b373a353b3b3a2971303939363c363e3f18373d333b36763b3735" class="soc-btn"><i class="fa-solid fa-envelope c-em"></i> <span data-i18n="soc_email">Email</span></a>
+                    <a href="https://github.com/ManusAgents" target="_blank" class="soc-btn"><i class="fa-brands fa-github c-gh"></i> <span data-i18n="soc_github">GitHub</span></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Support Vault (No Black Colors) -->
+    <!-- Support Vault -->
     <section class="section vault-bg" id="vault">
         <div class="container text-center">
-            <span class="sec-label" style="color:#f59e0b;"><i class="fa-solid fa-vault"></i> Support the Project</span>
-            <h2 class="sec-title" style="color:#fff;">The Donation Vault</h2>
-            <p class="sec-desc" style="color:#a5b4fc;">If ManusClaw has empowered your workflow, support the project to keep it alive and cover the API testing costs.</p>
-            
+            <span class="sec-label" style="color:#f59e0b;"><i class="fa-solid fa-vault"></i> <span data-i18n="vault_label">Support the Project</span></span>
+            <h2 class="sec-title" style="color:#fff;" data-i18n="vault_title">The Donation Vault</h2>
+            <p class="sec-desc" style="color:#a5b4fc;" data-i18n="vault_desc">If ManusClaw has empowered your workflow, support the project to keep it alive and cover the API testing costs.</p>
+
             <div class="vault-grid">
                 <div class="vault-card reveal">
                     <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
-                    <div class="v-title"><i class="fa-brands fa-ethereum" style="color:#10b981;"></i> USDT (TRC20 - Tron)</div>
+                    <div class="v-title"><i class="fa-brands fa-ethereum" style="color:#10b981;"></i> <span data-i18n="vault_usdt">USDT (TRC20 - Tron)</span></div>
                     <div class="address-box">
                         <span class="v-address" id="addr1">TH75J4zaMPwhyR3QxEFdwTCgU2Pp3yPUEr</span>
                         <button class="mini-copy" onclick="copyAddress('addr1', this)"><i class="fa-solid fa-copy"></i></button>
                     </div>
                 </div>
-                
+
                 <div class="vault-card reveal d-1">
                     <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
-                    <div class="v-title"><i class="fa-solid fa-wallet" style="color:#3b82f6;"></i> WebMoney (WMT & WMZ)</div>
+                    <div class="v-title"><i class="fa-solid fa-wallet" style="color:#3b82f6;"></i> <span data-i18n="vault_webmoney">WebMoney (WMT & WMZ)</span></div>
                     <div class="address-box">
                         <span class="v-address" id="addr2">T202226490170</span>
                         <button class="mini-copy" onclick="copyAddress('addr2', this)"><i class="fa-solid fa-copy"></i></button>
@@ -685,10 +1421,10 @@
                         <button class="mini-copy" onclick="copyAddress('addr3', this)"><i class="fa-solid fa-copy"></i></button>
                     </div>
                 </div>
-                
+
                 <div class="vault-card reveal d-2">
                     <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
-                    <div class="v-title"><i class="fa-solid fa-mobile-screen" style="color:#ec4899;"></i> bKash (Bangladesh)</div>
+                    <div class="v-title"><i class="fa-solid fa-mobile-screen" style="color:#ec4899;"></i> <span data-i18n="vault_bkash">bKash (Bangladesh)</span></div>
                     <div class="address-box">
                         <span class="v-address" id="addr4">01310211442</span>
                         <button class="mini-copy" onclick="copyAddress('addr4', this)"><i class="fa-solid fa-copy"></i></button>
@@ -700,29 +1436,618 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2026 <strong>ManusClaw v5.0.0</strong> — Built with <i class="fa-solid fa-fire" style="color:#ec4899;"></i> from Bangladesh by ManusAgents.</p>
+        <p data-i18n="footer_text">© 2026 <strong>ManusClaw v5.0.0</strong> — Built with <i class="fa-solid fa-fire" style="color:#ec4899;"></i> from Bangladesh by ManusClawAI.</p>
         <div style="margin-top: 15px;">
-            <a href="https://github.com/ManusAgents/ManusClaw"><i class="fa-brands fa-github"></i> Repository</a>
-            <a href="https://github.com/ManusAgents/ManusClaw-setup"><i class="fa-solid fa-box-open"></i> Setup Script</a>
-            <a href="https://github.com/ManusAgents/ManusClaw/blob/main/LICENSE"><i class="fa-solid fa-certificate"></i> License</a>
+            <a href="https://github.com/ManusAgents/ManusClaw"><i class="fa-brands fa-github"></i> <span data-i18n="footer_repo">Repository</span></a>
+            <a href="https://github.com/The-JDdev/manusclaw-setup"><i class="fa-solid fa-box-open"></i> <span data-i18n="footer_setup">Setup Script</span></a>
+            <a href="https://github.com/ManusAgents/ManusClaw/blob/main/LICENSE"><i class="fa-solid fa-certificate"></i> <span data-i18n="footer_license">License</span></a>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        // Clipboard Copy function using execCommand fallback
+        // ==================== TRANSLATIONS OBJECT ====================
+        const translations = {
+            en: {
+                nav_v5: 'v5.0.0 Features',
+                nav_arch: 'Architecture',
+                nav_tools: '14 Core Tools',
+                nav_engines: 'Engines',
+                nav_modes: 'Deploy Modes',
+                support_btn: 'Support Us',
+                drawer_v5: 'v5.0.0 Features',
+                drawer_arch: 'Architecture',
+                drawer_tools: '14 Core Tools',
+                drawer_engines: 'Internal Engines',
+                drawer_modes: 'Deploy Modes',
+                drawer_community: 'Community',
+                drawer_vault: 'Support Vault',
+                badge_framework: 'v5.0.0 Framework',
+                badge_channels: '12+ Channels',
+                badge_voice: 'Voice & Canvas',
+                hero_title: "Bangladesh's First Ultimate <br><span>Autonomous AI Framework</span>",
+                hero_desc: 'Unleash self-reasoning CLI beasts to execute code, browse the web, and dominate tasks — across 12+ messaging channels, with voice wake, live canvas A2UI, and multi-agent routing.',
+                hero_built: 'Built from',
+                btn_core_repo: 'Core Repository',
+                btn_setup_script: 'Get Setup Script',
+                sec_v5_label: 'Massive Evolution',
+                sec_v5_title: "What's New in v5.0.0?",
+                sec_v5_desc: 'ManusClaw is no longer just a chatbot wrapper. It has evolved into a true omnichannel AI platform.',
+                v5_card1_title: '12+ Messaging Channels',
+                v5_card1_desc: 'Agents now operate natively across Telegram, Discord, Slack, WhatsApp, Signal, Teams, Matrix, WebChat, and Email with cross-platform routing.',
+                v5_card2_title: 'Voice Wake & Talk Mode',
+                v5_card2_desc: 'Includes Porcupine wake-word detection (e.g., "Hey Manus") and a continuous talk loop. Command the agent via microphone and get TTS responses.',
+                v5_card3_title: 'Live Canvas (A2UI)',
+                v5_card3_desc: 'Agent-to-UI protocol enabled. Agents can now render real-time UI components, charts, tables, and interactive buttons via WebSockets.',
+                v5_card4_title: 'Webhooks & Gmail Pub/Sub',
+                v5_card4_desc: 'Features HMAC-verified incoming webhooks and Gmail Pub/Sub automation. Agents can handle tasks and auto-replies immediately as emails arrive.',
+                sec_arch_label: 'System Intelligence',
+                sec_arch_title: 'Multi-Agent Orchestration',
+                sec_arch_desc: 'A fully independent DAG pipeline operating on a strict PAORR (Plan -> Act -> Observe -> Reflect -> Retry) execution loop.',
+                arch_card1_title: '1. Product Manager 📝',
+                arch_card1_desc: 'Analyzes task requirements and generates a PRD (Product Requirement Document). Sets clear, measurable goals.',
+                arch_card2_title: '2. Architect 🏛️',
+                arch_card2_desc: 'Plans the software architecture, defines directory trees and the tech stack. Creates a perfect DAG execution plan.',
+                arch_card3_title: '3. Engineer (Manus) ⚙️',
+                arch_card3_desc: 'Utilizes the 14-tool arsenal to write code, execute it, and autonomously fix errors without human intervention.',
+                arch_card4_title: '4. QA Role 🔬',
+                arch_card4_desc: 'Ensures quality assurance by running rigorous tests and validating that everything is production-ready according to the PRD.',
+                sec_tools_label: 'Lethal Arsenal',
+                sec_tools_title: '14 Built-in Core Tools',
+                sec_tools_desc: 'The agent uses these tools to interact with the real world. Soft shapes hiding industrial power.',
+                tools_card1_title: 'Persistent Bash',
+                tools_card1_desc: 'Stateful shell sessions that remain active in memory. Control the OS natively across tool calls.',
+                tools_card2_title: 'Isolated PythonExec',
+                tools_card2_desc: 'Executes code in a fresh, isolated multiprocessing sandbox with a strict 2GB memory limit.',
+                tools_card3_title: 'BrowserUse Autonomy',
+                tools_card3_desc: 'Playwright-driven Chromium automation. Grants the freedom to navigate, click, and extract web data.',
+                tools_card4_title: 'EmailTool & Gmail',
+                tools_card4_desc: 'New addition! The agent can now read, send, and reply in threads autonomously.',
+                tools_card5_title: 'CanvasTool & DataViz',
+                tools_card5_desc: 'Renders live charts, UI components, and interactive elements directly to connected screens.',
+                tools_card6_title: 'Cross-Session Memory',
+                tools_card6_desc: 'SQLite + FTS5 memory integration. Grants the ability to recall past sessions and learn from failures.',
+                sec_engines_label: 'Internal Engines',
+                sec_engines_title: 'Digital That Feels Real',
+                sec_engines_desc: "The framework's solid logic and robust security systems are represented through these realistic elements.",
+                engines_card1_title: 'PAORR & Fallback Logic',
+                engines_card1_desc: 'Tools are auto-penalized on failure. Features seamless failover rotation between LLM providers (OpenAI, Groq, Anthropic).',
+                engines_card1_stitch: '━ ━ calculated',
+                engines_card2_title: 'Identity & Permissions',
+                engines_card2_desc: 'IdentityGuard stops jailbreaks using 30+ regex patterns. The 3-tier Permission Gate blocks the execution of dangerous commands.',
+                engines_card2_stitch: '◇ ◇ secured',
+                engines_card3_title: 'Audit Ledger & SQLite',
+                engines_card3_desc: 'WAL-mode SQLite logging. Every step, tool call, stdout, and error trace is permanently recorded. Zero data loss.',
+                engines_card3_stitch: '◆ ◆ timeless',
+                sec_modes_label: 'Deployment',
+                sec_modes_title: 'Run Anywhere You Want',
+                sec_modes_desc: 'ManusClaw can be deployed in any environment, from heavy backend servers to mobile smartphones.',
+                modes_card1_title: 'Standalone CLI',
+                modes_card1_desc: 'Wake up the AI shell with the native terminal command <code>manusclaw</code>. Slash commands included.',
+                modes_card2_title: 'SSH Remote Gateway',
+                modes_card2_desc: 'New feature! Runs an asyncssh server on port 2222, providing remote access via a restricted shell.',
+                modes_card3_title: 'Desktop & Windows Hub',
+                modes_card3_desc: 'Includes Flet Desktop GUI, macOS Menu Bar, and Windows System Tray companion applications.',
+                modes_card4_title: '3 Sandbox Backends',
+                modes_card4_desc: 'Supports Docker, SSH remote host, and OpenShell (Linux namespaces) for secure code isolation.',
+                copy_btn: 'Copy',
+                code_comment1: '# Installing ManusClaw v5.0.0 is straightforward',
+                code_comment2: '# Run with all v5.0 features (Voice, Channels, UI)',
+                code_comment3: '# Start the Voice Wake Mode',
+                community_quote: 'If ManusClaw has empowered your workflow, consider supporting its continued development. Every contribution fuels the next evolution of autonomous AI agents.',
+                community_loc: 'Founder & Lead Architect (SHS Lab)',
+                soc_facebook: 'Facebook',
+                soc_telegram: 'Telegram',
+                soc_email: 'Email',
+                soc_github: 'GitHub',
+                vault_label: 'Support the Project',
+                vault_title: 'The Donation Vault',
+                vault_desc: 'If ManusClaw has empowered your workflow, support the project to keep it alive and cover the API testing costs.',
+                vault_usdt: 'USDT (TRC20 - Tron)',
+                vault_webmoney: 'WebMoney (WMT & WMZ)',
+                vault_bkash: 'bKash (Bangladesh)',
+                footer_text: '© 2026 <strong>ManusClaw v5.0.0</strong> — Built with <i class="fa-solid fa-fire" style="color:#ec4899;"></i> from Bangladesh by ManusClawAI.',
+                footer_repo: 'Repository',
+                footer_setup: 'Setup Script',
+                footer_license: 'License',
+                page_title: 'ManusClaw v5.0.0 — The Ultimate Autonomous AI Ecosystem'
+            },
+            bn: {
+                nav_v5: 'v5.0.0 ফিচার',
+                nav_arch: 'আর্কিটেকচার',
+                nav_tools: '১৪টি কোর টুল',
+                nav_engines: 'ইঞ্জিন',
+                nav_modes: 'ডেপ্লয় মোড',
+                support_btn: 'সাপোর্ট করুন',
+                drawer_v5: 'v5.0.0 ফিচার',
+                drawer_arch: 'আর্কিটেকচার',
+                drawer_tools: '১৪টি কোর টুল',
+                drawer_engines: 'ইন্টারনাল ইঞ্জিন',
+                drawer_modes: 'ডেপ্লয় মোড',
+                drawer_community: 'কমিউনিটি',
+                drawer_vault: 'সাপোর্ট ভল্ট',
+                badge_framework: 'v5.0.0 ফ্রেমওয়ার্ক',
+                badge_channels: '১২+ চ্যানেল',
+                badge_voice: 'ভয়েস ও ক্যানভাস',
+                hero_title: 'বাংলাদেশের প্রথম আলটিমেট <br><span>স্বয়ংক্রিয় এআই ফ্রেমওয়ার্ক</span>',
+                hero_desc: 'কোড এক্সিকিউট, ওয়েব ব্রাউজ এবং কাজ সম্পন্ন করতে স্ব-যুক্তিযুক্ত CLI বিস্ট আনলিশ করুন — ১২+ মেসেজিং চ্যানেল, ভয়েস ওয়েক, লাইভ ক্যানভাস A2UI এবং মাল্টি-এজেন্ট রাউটিং সহ।',
+                hero_built: 'নির্মিত হয়েছে',
+                btn_core_repo: 'কোর রিপোজিটরি',
+                btn_setup_script: 'সেটআপ স্ক্রিপ্ট নিন',
+                sec_v5_label: 'বিশাল বিবর্তন',
+                sec_v5_title: 'v5.0.0-এ নতুন কী?',
+                sec_v5_desc: 'ম্যানুসক্ল এখন আর শুধু চ্যাটবট র‍্যাপার নয়। এটি একটি সত্যিকারের সর্বচ্যানেল এআই প্ল্যাটফর্মে বিকশিত হয়েছে।',
+                v5_card1_title: '১২+ মেসেজিং চ্যানেল',
+                v5_card1_desc: 'এজেন্টরা এখন টেলিগ্রাম, ডিসকর্ড, স্ল্যাক, হোয়াটসঅ্যাপ, সিগন্যাল, টিমস, ম্যাট্রিক্স, ওয়েবচ্যাট এবং ইমেইলে ক্রস-প্ল্যাটফর্ম রাউটিং সহ কাজ করে।',
+                v5_card2_title: 'ভয়েস ওয়েক ও টক মোড',
+                v5_card2_desc: 'পোরকুপাইন ওয়েক-ওয়ার্ড ডিটেকশন (যেমন "হেই ম্যানুস") এবং একটানা টক লুপ অন্তর্ভুক্ত। মাইক্রোফোনের মাধ্যমে এজেন্টকে কমান্ড করুন এবং TTS উত্তর পান।',
+                v5_card3_title: 'লাইভ ক্যানভাস (A2UI)',
+                v5_card3_desc: 'এজেন্ট-টু-UI প্রোটোকল সক্রিয়। এজেন্টরা এখন WebSocket-এর মাধ্যমে রিয়েল-টাইম UI কম্পোনেন্ট, চার্ট, টেবিল ও ইন্টারঅ্যাকটিভ বোতাম রেন্ডার করতে পারে।',
+                v5_card4_title: 'ওয়েবহুক ও জিমেইল পাব/সাব',
+                v5_card4_desc: 'HMAC-ভেরিফায়েড ইনকামিং ওয়েবহুক এবং জিমেইল পাব/সাব অটোমেশন। এজেন্টরা ইমেইল আসার সাথে সাথেই কাজ ও অটো-রিপ্লাই পরিচালনা করতে পারে।',
+                sec_arch_label: 'সিস্টেম ইন্টেলিজেন্স',
+                sec_arch_title: 'মাল্টি-এজেন্ট অর্কেস্ট্রেশন',
+                sec_arch_desc: 'একটি সম্পূর্ণ স্বাধীন DAG পাইপলাইন যা কঠোর PAORR (প্ল্যান -> অ্যাক্ট -> অবজার্ভ -> রিফ্লেক্ট -> রিট্রাই) এক্সিকিউশন লুপে কাজ করে।',
+                arch_card1_title: '১. প্রোডাক্ট ম্যানেজার 📝',
+                arch_card1_desc: 'কাজের প্রয়োজনীয়তা বিশ্লেষণ করে এবং একটি PRD (প্রোডাক্ট রিকোয়ারমেন্ট ডকুমেন্ট) তৈরি করে। স্পষ্ট, পরিমাপযোগ্য লক্ষ্য নির্ধারণ করে।',
+                arch_card2_title: '২. আর্কিটেক্ট 🏛️',
+                arch_card2_desc: 'সফটওয়্যার আর্কিটেকচার পরিকল্পনা করে, ডিরেক্টরি ট্রি ও টেক স্ট্যাক নির্ধারণ করে। একটি নিখুঁত DAG এক্সিকিউশন প্ল্যান তৈরি করে।',
+                arch_card3_title: '৩. ইঞ্জিনিয়ার (ম্যানুস) ⚙️',
+                arch_card3_desc: 'কোড লিখতে, এক্সিকিউট করতে এবং মানুষের হস্তক্ষেপ ছাড়াই স্বয়ংক্রিয়ভাবে ত্রুটি ঠিক করতে ১৪-টুল অস্ত্রভাণ্ডার ব্যবহার করে।',
+                arch_card4_title: '৪. QA রোল 🔬',
+                arch_card4_desc: 'কঠোর পরীক্ষা চালিয়ে এবং PRD অনুযায়ী সবকিছু প্রোডাকশন-রেডি কিনা তা যাচাই করে গুণমান নিশ্চিত করে।',
+                sec_tools_label: 'মারাত্মক অস্ত্রভাণ্ডার',
+                sec_tools_title: '১৪টি বিল্ট-ইন কোর টুল',
+                sec_tools_desc: 'এজেন্ট এই টুলগুলো ব্যবহার করে বাস্তব বিশ্বের সাথে যোগাযোগ করতে। নরম আকৃতি যা শিল্প শক্তি লুকিয়ে রাখে।',
+                tools_card1_title: 'পারসিস্টেন্ট ব্যাশ',
+                tools_card1_desc: 'স্টেটফুল শেল সেশন যা মেমোরিতে সক্রিয় থাকে। টুল কল জুড়ে OS নেটিভলি নিয়ন্ত্রণ করুন।',
+                tools_card2_title: 'আইসোলেটেড পাইথনএক্সেক',
+                tools_card2_desc: 'একটি তাজা, আইসোলেটেড মাল্টিপ্রসেসিং স্যান্ডবক্সে কোড এক্সিকিউট করে যাতে কঠোর 2GB মেমোরি সীমা রয়েছে।',
+                tools_card3_title: 'ব্রাউজারইউজ অটোনমি',
+                tools_card3_desc: 'প্লেরাইট-চালিত ক্রোমিয়াম অটোমেশন। নেভিগেট, ক্লিক এবং ওয়েব ডেটা এক্সট্রাক্ট করার স্বাধীনতা দেয়।',
+                tools_card4_title: 'ইমেইলটুল ও জিমেইল',
+                tools_card4_desc: 'নতুন সংযোজন! এজেন্ট এখন স্বয়ংক্রিয়ভাবে থ্রেডে পড়তে, পাঠাতে এবং উত্তর দিতে পারে।',
+                tools_card5_title: 'ক্যানভাসটুল ও ডেটাভিজ',
+                tools_card5_desc: 'সংযুক্ত স্ক্রিনে সরাসরি লাইভ চার্ট, UI কম্পোনেন্ট এবং ইন্টারঅ্যাকটিভ উপাদান রেন্ডার করে।',
+                tools_card6_title: 'ক্রস-সেশন মেমোরি',
+                tools_card6_desc: 'SQLite + FTS5 মেমোরি ইন্টিগ্রেশন। অতীত সেশন স্মরণ করার এবং ব্যর্থতা থেকে শেখার ক্ষমতা দেয়।',
+                sec_engines_label: 'ইন্টারনাল ইঞ্জিন',
+                sec_engines_title: 'ডিজিটাল যা বাস্তব মনে হয়',
+                sec_engines_desc: 'ফ্রেমওয়ার্কের শক্ত লজিক এবং শক্তিশালী নিরাপত্তা সিস্টেম এই বাস্তবসম্মত উপাদানগুলির মাধ্যমে উপস্থাপিত হয়েছে।',
+                engines_card1_title: 'PAORR ও ফলব্যাক লজিক',
+                engines_card1_desc: 'ব্যর্থতায় টুল স্বয়ংক্রিয়ভাবে পেনালাইজড হয়। LLM প্রোভাইডার (OpenAI, Groq, Anthropic) এর মধ্যে নিরবচ্ছিন্ন ফেইলওভার রোটেশন রয়েছে।',
+                engines_card1_stitch: '━ ━ গণনাকৃত',
+                engines_card2_title: 'আইডেন্টিটি ও পারমিশন',
+                engines_card2_desc: 'আইডেন্টিটিগার্ড ৩০+ রেজেক্স প্যাটার্ন ব্যবহার করে জেলব্রেক বন্ধ করে। ৩-স্তরের পারমিশন গেট বিপজ্জনক কমান্ড এক্সিকিউশন ব্লক করে।',
+                engines_card2_stitch: '◇ ◇ সুরক্ষিত',
+                engines_card3_title: 'অডিট লেজার ও SQLite',
+                engines_card3_desc: 'WAL-মোড SQLite লগিং। প্রতিটি ধাপ, টুল কল, stdout এবং ত্রুটি ট্রেস স্থায়ীভাবে রেকর্ড করা হয়। শূন্য ডেটা ক্ষতি।',
+                engines_card3_stitch: '◆ ◆ চিরন্তন',
+                sec_modes_label: 'ডেপ্লয়মেন্ট',
+                sec_modes_title: 'যেখানে খুশি চালান',
+                sec_modes_desc: 'ম্যানুসক্ল যেকোনো পরিবেশে ডেপ্লয় করা যায়, ভারী ব্যাকএন্ড সার্ভার থেকে মোবাইল স্মার্টফোন পর্যন্ত।',
+                modes_card1_title: 'স্ট্যান্ডঅ্যালোন CLI',
+                modes_card1_desc: 'নেটিভ টার্মিনাল কমান্ড <code>manusclaw</code> দিয়ে AI শেল জাগিয়ে তুলুন। স্ল্যাশ কমান্ড অন্তর্ভুক্ত।',
+                modes_card2_title: 'SSH রিমোট গেটওয়ে',
+                modes_card2_desc: 'নতুন ফিচার! পোর্ট 2222-এ একটি asyncssh সার্ভার চালায়, একটি রেস্ট্রিক্টেড শেলের মাধ্যমে রিমোট অ্যাক্সেস প্রদান করে।',
+                modes_card3_title: 'ডেস্কটপ ও উইন্ডোজ হাব',
+                modes_card3_desc: 'Flet ডেস্কটপ GUI, macOS মেনু বার এবং উইন্ডোজ সিস্টেম ট্রে সহযোগী অ্যাপ্লিকেশন অন্তর্ভুক্ত।',
+                modes_card4_title: '৩টি স্যান্ডবক্স ব্যাকএন্ড',
+                modes_card4_desc: 'নিরাপদ কোড আইসোলেশনের জন্য Docker, SSH রিমোট হোস্ট এবং OpenShell (Linux namespaces) সাপোর্ট করে।',
+                copy_btn: 'কপি',
+                code_comment1: '# ManusClaw v5.0.0 ইন্সটল করা সহজ',
+                code_comment2: '# সকল v5.0 ফিচার সহ চালান (ভয়েস, চ্যানেল, UI)',
+                code_comment3: '# ভয়েস ওয়েক মোড শুরু করুন',
+                community_quote: 'যদি ম্যানুসক্ল আপনার কর্মপ্রবাহকে শক্তিশালী করে থাকে, তবে এর চলমান উন্নয়নে সহায়তা করার কথা বিবেচনা করুন। প্রতিটি অবদান স্বয়ংক্রিয় AI এজেন্টের পরবর্তী বিবর্তনকে জ্বালানি দেয়।',
+                community_loc: 'প্রতিষ্ঠাতা ও লিড আর্কিটেক্ট (SHS Lab)',
+                soc_facebook: 'ফেসবুক',
+                soc_telegram: 'টেলিগ্রাম',
+                soc_email: 'ইমেইল',
+                soc_github: 'গিটহাব',
+                vault_label: 'প্রজেক্ট সাপোর্ট করুন',
+                vault_title: 'ডোনেশন ভল্ট',
+                vault_desc: 'যদি ম্যানুসক্ল আপনার কর্মপ্রবাহকে শক্তিশালী করে থাকে, প্রজেক্টটিকে বাঁচিয়ে রাখতে এবং API টেস্টিং খরচ কভার করতে সহায়তা করুন।',
+                vault_usdt: 'USDT (TRC20 - Tron)',
+                vault_webmoney: 'WebMoney (WMT & WMZ)',
+                vault_bkash: 'bKash (বাংলাদেশ)',
+                footer_text: '© 2026 <strong>ManusClaw v5.0.0</strong> — বাংলাদেশ থেকে <i class="fa-solid fa-fire" style="color:#ec4899;"></i> ভালোবাসার সাথে নির্মিত ManusClawAI দ্বারা।',
+                footer_repo: 'রিপোজিটরি',
+                footer_setup: 'সেটআপ স্ক্রিপ্ট',
+                footer_license: 'লাইসেন্স',
+                page_title: 'ManusClaw v5.0.0 — আলটিমেট স্বয়ংক্রিয় AI ইকোসিস্টেম'
+            },
+            hi: {
+                nav_v5: 'v5.0.0 सुविधाएँ',
+                nav_arch: 'आर्किटेक्चर',
+                nav_tools: '14 कोर टूल्स',
+                nav_engines: 'इंजन',
+                nav_modes: 'डिप्लॉय मोड',
+                support_btn: 'सपोर्ट करें',
+                drawer_v5: 'v5.0.0 सुविधाएँ',
+                drawer_arch: 'आर्किटेक्चर',
+                drawer_tools: '14 कोर टूल्स',
+                drawer_engines: 'इंटरनल इंजन',
+                drawer_modes: 'डिप्लॉय मोड',
+                drawer_community: 'समुदाय',
+                drawer_vault: 'सपोर्ट वॉल्ट',
+                badge_framework: 'v5.0.0 फ्रेमवर्क',
+                badge_channels: '12+ चैनल',
+                badge_voice: 'वॉइस और कैनवस',
+                hero_title: 'बांग्लादेश का पहला अल्टीमेट <br><span>ऑटोनॉमस AI फ्रेमवर्क</span>',
+                hero_desc: 'कोड एक्जीक्यूट करने, वेब ब्राउज़ करने और कार्यों को पूरा करने के लिए सेल्फ-रीजनिंग CLI बीस्ट को अनलीश करें — 12+ मैसेजिंग चैनल, वॉइस वेक, लाइव कैनवस A2UI और मल्टी-एजेंट रूटिंग के साथ।',
+                hero_built: 'निर्मित',
+                btn_core_repo: 'कोर रिपॉजिटरी',
+                btn_setup_script: 'सेटअप स्क्रिप्ट लें',
+                sec_v5_label: 'विशाल विकास',
+                sec_v5_title: 'v5.0.0 में नया क्या है?',
+                sec_v5_desc: 'मैनसक्लॉ अब केवल एक चैटबॉट रैपर नहीं है। यह एक सच्चे ओम्नीचैनल AI प्लेटफॉर्म में विकसित हो गया है।',
+                v5_card1_title: '12+ मैसेजिंग चैनल',
+                v5_card1_desc: 'एजेंट अब टेलीग्राम, डिस्कॉर्ड, स्लैक, व्हाट्सएप, सिग्नल, टीम्स, मैट्रिक्स, वेबचैट और ईमेल पर क्रॉस-प्लेटफॉर्म रूटिंग के साथ काम करते हैं।',
+                v5_card2_title: 'वॉइस वेक और टॉक मोड',
+                v5_card2_desc: 'पॉरक्यूपाइन वेक-वर्ड डिटेक्शन (जैसे "हे मैनस") और निरंतर टॉक लूप शामिल है। माइक्रोफ़ोन के माध्यम से एजेंट को कमांड करें और TTS उत्तर प्राप्त करें।',
+                v5_card3_title: 'लाइव कैनवस (A2UI)',
+                v5_card3_desc: 'एजेंट-टू-UI प्रोटोकॉल सक्षम। एजेंट अब WebSocket के माध्यम से रीयल-टाइम UI कंपोनेंट, चार्ट, टेबल और इंटरैक्टिव बटन रेंडर कर सकते हैं।',
+                v5_card4_title: 'वेबहुक और जीमेल पब/सब',
+                v5_card4_desc: 'HMAC-वेरिफाइड इनकमिंग वेबहुक और जीमेल पब/सब ऑटोमेशन। एजेंट ईमेल आते ही कार्य और ऑटो-रिप्लाई संभाल सकते हैं।',
+                sec_arch_label: 'सिस्टम इंटेलिजेंस',
+                sec_arch_title: 'मल्टी-एजेंट ऑर्केस्ट्रेशन',
+                sec_arch_desc: 'एक पूरी तरह से स्वतंत्र DAG पाइपलाइन जो सख्त PAORR (प्लान -> एक्ट -> ऑब्जर्व -> रिफ्लेक्ट -> रिट्राई) एक्जीक्यूशन लूप पर काम करती है।',
+                arch_card1_title: '1. प्रोडक्ट मैनेजर 📝',
+                arch_card1_desc: 'कार्य आवश्यकताओं का विश्लेषण करता है और एक PRD (प्रोडक्ट रिक्वायरमेंट डॉक्यूमेंट) तैयार करता है। स्पष्ट, मापने योग्य लक्ष्य निर्धारित करता है।',
+                arch_card2_title: '2. आर्किटेक्ट 🏛️',
+                arch_card2_desc: 'सॉफ्टवेयर आर्किटेक्चर की योजना बनाता है, डायरेक्टरी ट्री और टेक स्टैक परिभाषित करता है। एक परफेक्ट DAG एक्जीक्यूशन प्लान बनाता है।',
+                arch_card3_title: '3. इंजीनियर (मैनस) ⚙️',
+                arch_card3_desc: 'कोड लिखने, उसे एक्जीक्यूट करने और मानव हस्तक्षेप के बिना स्वायत्त रूप से त्रुटियों को ठीक करने के लिए 14-टूल शस्त्रागार का उपयोग करता है।',
+                arch_card4_title: '4. QA भूमिका 🔬',
+                arch_card4_desc: 'कठोर परीक्षण चलाकर और PRD के अनुसार सब कुछ प्रोडक्शन-रेडी है यह सत्यापित करके गुणवत्ता सुनिश्चित करता है।',
+                sec_tools_label: 'घातक शस्त्रागार',
+                sec_tools_title: '14 बिल्ट-इन कोर टूल्स',
+                sec_tools_desc: 'एजेंट इन टूल्स का उपयोग वास्तविक दुनिया से इंटरैक्ट करने के लिए करता है। नरम आकार जो औद्योगिक शक्ति छिपाते हैं।',
+                tools_card1_title: 'पर्सिस्टेंट बैश',
+                tools_card1_desc: 'स्टेटफुल शेल सेशन जो मेमोरी में सक्रिय रहते हैं। टूल कॉल के दौरान OS को नेटिवली नियंत्रित करें।',
+                tools_card2_title: 'आइसोलेटेड PythonExec',
+                tools_card2_desc: 'एक ताज़ा, आइसोलेटेड मल्टीप्रोसेसिंग सैंडबॉक्स में कोड एक्जीक्यूट करता है जिसमें सख्त 2GB मेमोरी सीमा है।',
+                tools_card3_title: 'BrowserUse ऑटोनॉमी',
+                tools_card3_desc: 'प्लेराइट-संचालित क्रोमियम ऑटोमेशन। नेविगेट करने, क्लिक करने और वेब डेटा निकालने की स्वतंत्रता देता है।',
+                tools_card4_title: 'EmailTool और जीमेल',
+                tools_card4_desc: 'नया जोड़! एजेंट अब स्वायत्त रूप से थ्रेड में पढ़, भेज और उत्तर दे सकता है।',
+                tools_card5_title: 'CanvasTool और DataViz',
+                tools_card5_desc: 'कनेक्टेड स्क्रीन पर सीधे लाइव चार्ट, UI कंपोनेंट और इंटरैक्टिव एलिमेंट रेंडर करता है।',
+                tools_card6_title: 'क्रॉस-सेशन मेमोरी',
+                tools_card6_desc: 'SQLite + FTS5 मेमोरी इंटीग्रेशन। पिछले सेशन को याद करने और विफलताओं से सीखने की क्षमता देता है।',
+                sec_engines_label: 'इंटरनल इंजन',
+                sec_engines_title: 'डिजिटल जो वास्तविक लगे',
+                sec_engines_desc: 'फ्रेमवर्क का ठोस तर्क और मजबूत सुरक्षा सिस्टम इन यथार्थवादी तत्वों के माध्यम से दर्शाए गए हैं।',
+                engines_card1_title: 'PAORR और फॉलबैक लॉजिक',
+                engines_card1_desc: 'विफलता पर टूल्स ऑटो-पेनलाइज़्ड होते हैं। LLM प्रोवाइडर्स (OpenAI, Groq, Anthropic) के बीच सीमलेस फेलओवर रोटेशन है।',
+                engines_card1_stitch: '━ ━ गणना की गई',
+                engines_card2_title: 'आइडेंटिटी और परमिशन्स',
+                engines_card2_desc: 'आइडेंटिटीगार्ड 30+ रेजेक्स पैटर्न का उपयोग करके जेलब्रेक रोकता है। 3-टियर परमिशन गेट खतरनाक कमांड के एक्जीक्यूशन को ब्लॉक करता है।',
+                engines_card2_stitch: '◇ ◇ सुरक्षित',
+                engines_card3_title: 'ऑडिट लेजर और SQLite',
+                engines_card3_desc: 'WAL-मोड SQLite लॉगिंग। हर स्टेप, टूल कॉल, stdout और एरर ट्रेस स्थायी रूप से रिकॉर्ड किया जाता है। शून्य डेटा हानि।',
+                engines_card3_stitch: '◆ ◆ शाश्वत',
+                sec_modes_label: 'डिप्लॉयमेंट',
+                sec_modes_title: 'जहाँ चाहें चलाएँ',
+                sec_modes_desc: 'मैनसक्लॉ को किसी भी वातावरण में डिप्लॉय किया जा सकता है, भारी बैकएंड सर्वर से लेकर मोबाइल स्मार्टफोन तक।',
+                modes_card1_title: 'स्टैंडअलोन CLI',
+                modes_card1_desc: 'नेटिव टर्मिनल कमांड <code>manusclaw</code> से AI शेल को जगाएँ। स्लैश कमांड शामिल।',
+                modes_card2_title: 'SSH रिमोट गेटवे',
+                modes_card2_desc: 'नया फीचर! पोर्ट 2222 पर एक asyncssh सर्वर चलाता है, एक प्रतिबंधित शेल के माध्यम से रिमोट एक्सेस प्रदान करता है।',
+                modes_card3_title: 'डेस्कटॉप और विंडोज हब',
+                modes_card3_desc: 'Flet डेस्कटॉप GUI, macOS मेनू बार और विंडोज सिस्टम ट्रे सहयोगी एप्लिकेशन शामिल हैं।',
+                modes_card4_title: '3 सैंडबॉक्स बैकएंड',
+                modes_card4_desc: 'सुरक्षित कोड आइसोलेशन के लिए Docker, SSH रिमोट होस्ट और OpenShell (Linux namespaces) को सपोर्ट करता है।',
+                copy_btn: 'कॉपी',
+                code_comment1: '# ManusClaw v5.0.0 इंस्टॉल करना सरल है',
+                code_comment2: '# सभी v5.0 फीचर्स के साथ चलाएँ (वॉइस, चैनल, UI)',
+                code_comment3: '# वॉइस वेक मोड शुरू करें',
+                community_quote: 'यदि मैनसक्लॉ ने आपके वर्कफ़्लो को सशक्त बनाया है, तो इसके निरंतर विकास का समर्थन करने पर विचार करें। हर योगदान स्वायत्त AI एजेंटों के अगले विकास को ईंधन देता है।',
+                community_loc: 'संस्थापक और लीड आर्किटेक्ट (SHS Lab)',
+                soc_facebook: 'फेसबुक',
+                soc_telegram: 'टेलीग्राम',
+                soc_email: 'ईमेल',
+                soc_github: 'गिटहब',
+                vault_label: 'प्रोजेक्ट का समर्थन करें',
+                vault_title: 'दान वॉल्ट',
+                vault_desc: 'यदि मैनसक्लॉ ने आपके वर्कफ़्लो को सशक्त बनाया है, तो प्रोजेक्ट को जीवित रखने और API परीक्षण लागत को कवर करने के लिए समर्थन करें।',
+                vault_usdt: 'USDT (TRC20 - Tron)',
+                vault_webmoney: 'WebMoney (WMT & WMZ)',
+                vault_bkash: 'bKash (बांग्लादेश)',
+                footer_text: '© 2026 <strong>ManusClaw v5.0.0</strong> — बांग्लादेश से <i class="fa-solid fa-fire" style="color:#ec4899;"></i> प्यार के साथ ManusClawAI द्वारा निर्मित।',
+                footer_repo: 'रिपॉजिटरी',
+                footer_setup: 'सेटअप स्क्रिप्ट',
+                footer_license: 'लाइसेंस',
+                page_title: 'ManusClaw v5.0.0 — अल्टीमेट ऑटोनॉमस AI इकोसिस्टम'
+            },
+            zh: {
+                nav_v5: 'v5.0.0 功能',
+                nav_arch: '架构',
+                nav_tools: '14个核心工具',
+                nav_engines: '引擎',
+                nav_modes: '部署模式',
+                support_btn: '支持我们',
+                drawer_v5: 'v5.0.0 功能',
+                drawer_arch: '架构',
+                drawer_tools: '14个核心工具',
+                drawer_engines: '内部引擎',
+                drawer_modes: '部署模式',
+                drawer_community: '社区',
+                drawer_vault: '支持金库',
+                badge_framework: 'v5.0.0 框架',
+                badge_channels: '12+ 频道',
+                badge_voice: '语音与画布',
+                hero_title: '孟加拉国首个终极<br><span>自主AI框架</span>',
+                hero_desc: '释放自推理CLI猛兽来执行代码、浏览网页并完成任务——跨12+消息频道，支持语音唤醒、实时画布A2UI和多智能体路由。',
+                hero_built: '来自',
+                btn_core_repo: '核心仓库',
+                btn_setup_script: '获取安装脚本',
+                sec_v5_label: '巨大进化',
+                sec_v5_title: 'v5.0.0 有什么新功能？',
+                sec_v5_desc: 'ManusClaw不再只是一个聊天机器人包装器。它已经发展成为一个真正的全渠道AI平台。',
+                v5_card1_title: '12+ 消息频道',
+                v5_card1_desc: '智能体现在可以在Telegram、Discord、Slack、WhatsApp、Signal、Teams、Matrix、WebChat和电子邮件上原生运行，并支持跨平台路由。',
+                v5_card2_title: '语音唤醒与对话模式',
+                v5_card2_desc: '包含Porcupine唤醒词检测（例如"Hey Manus"）和连续对话循环。通过麦克风命令智能体并获得TTS响应。',
+                v5_card3_title: '实时画布 (A2UI)',
+                v5_card3_desc: '智能体到UI协议已启用。智能体现在可以通过WebSocket渲染实时UI组件、图表、表格和交互按钮。',
+                v5_card4_title: 'Webhook和Gmail发布/订阅',
+                v5_card4_desc: '具有HMAC验证的传入webhook和Gmail发布/订阅自动化。智能体可以在电子邮件到达时立即处理任务和自动回复。',
+                sec_arch_label: '系统智能',
+                sec_arch_title: '多智能体编排',
+                sec_arch_desc: '一个完全独立的DAG流水线，在严格的PAORR（计划->行动->观察->反思->重试）执行循环上运行。',
+                arch_card1_title: '1. 产品经理 📝',
+                arch_card1_desc: '分析任务需求并生成PRD（产品需求文档）。设定清晰、可衡量的目标。',
+                arch_card2_title: '2. 架构师 🏛️',
+                arch_card2_desc: '规划软件架构，定义目录树和技术栈。创建完美的DAG执行计划。',
+                arch_card3_title: '3. 工程师 (Manus) ⚙️',
+                arch_card3_desc: '利用14工具武器库编写代码、执行代码，并在无需人工干预的情况下自主修复错误。',
+                arch_card4_title: '4. QA角色 🔬',
+                arch_card4_desc: '通过运行严格的测试并验证一切是否符合PRD的生产就绪标准来确保质量保证。',
+                sec_tools_label: '致命武器库',
+                sec_tools_title: '14个内置核心工具',
+                sec_tools_desc: '智能体使用这些工具与现实世界交互。柔软的外形隐藏着工业级的力量。',
+                tools_card1_title: '持久化Bash',
+                tools_card1_desc: '在内存中保持活跃的有状态shell会话。在工具调用之间原生控制操作系统。',
+                tools_card2_title: '隔离PythonExec',
+                tools_card2_desc: '在一个全新的、隔离的多进程沙箱中执行代码，具有严格的2GB内存限制。',
+                tools_card3_title: 'BrowserUse自主性',
+                tools_card3_desc: 'Playwright驱动的Chromium自动化。赋予导航、点击和提取网页数据的自由。',
+                tools_card4_title: 'EmailTool和Gmail',
+                tools_card4_desc: '新增功能！智能体现在可以自主地在线程中阅读、发送和回复。',
+                tools_card5_title: 'CanvasTool和数据可视化',
+                tools_card5_desc: '直接在连接的屏幕上渲染实时图表、UI组件和交互元素。',
+                tools_card6_title: '跨会话记忆',
+                tools_card6_desc: 'SQLite + FTS5记忆集成。赋予回忆过去会话并从失败中学习的能力。',
+                sec_engines_label: '内部引擎',
+                sec_engines_title: '感觉真实的数字',
+                sec_engines_desc: '框架的坚实逻辑和强大的安全系统通过这些逼真的元素呈现。',
+                engines_card1_title: 'PAORR和回退逻辑',
+                engines_card1_desc: '工具在失败时自动受罚。具有LLM提供商（OpenAI、Groq、Anthropic）之间的无缝故障转移轮换。',
+                engines_card1_stitch: '━ ━ 已计算',
+                engines_card2_title: '身份与权限',
+                engines_card2_desc: 'IdentityGuard使用30+正则表达式模式阻止越狱。3层权限门阻止危险命令的执行。',
+                engines_card2_stitch: '◇ ◇ 已安全',
+                engines_card3_title: '审计账本和SQLite',
+                engines_card3_desc: 'WAL模式SQLite日志记录。每一步、工具调用、stdout和错误跟踪都被永久记录。零数据丢失。',
+                engines_card3_stitch: '◆ ◆ 永恒',
+                sec_modes_label: '部署',
+                sec_modes_title: '随时随地运行',
+                sec_modes_desc: 'ManusClaw可以部署在任何环境中，从重型后端服务器到移动智能手机。',
+                modes_card1_title: '独立CLI',
+                modes_card1_desc: '使用原生终端命令<code>manusclaw</code>唤醒AI shell。包含斜杠命令。',
+                modes_card2_title: 'SSH远程网关',
+                modes_card2_desc: '新功能！在端口2222上运行asyncssh服务器，通过受限shell提供远程访问。',
+                modes_card3_title: '桌面和Windows中心',
+                modes_card3_desc: '包括Flet桌面GUI、macOS菜单栏和Windows系统托盘配套应用程序。',
+                modes_card4_title: '3个沙箱后端',
+                modes_card4_desc: '支持Docker、SSH远程主机和OpenShell（Linux命名空间）进行安全代码隔离。',
+                copy_btn: '复制',
+                code_comment1: '# 安装ManusClaw v5.0.0非常简单',
+                code_comment2: '# 使用所有v5.0功能运行（语音、频道、UI）',
+                code_comment3: '# 启动语音唤醒模式',
+                community_quote: '如果ManusClaw增强了您的工作流程，请考虑支持其持续发展。每一份贡献都为自主AI智能体的下一次进化提供动力。',
+                community_loc: '创始人兼首席架构师 (SHS Lab)',
+                soc_facebook: '脸书',
+                soc_telegram: '电报',
+                soc_email: '电子邮件',
+                soc_github: 'GitHub',
+                vault_label: '支持项目',
+                vault_title: '捐赠金库',
+                vault_desc: '如果ManusClaw增强了您的工作流程，请支持项目以保持其活力并支付API测试成本。',
+                vault_usdt: 'USDT (TRC20 - Tron)',
+                vault_webmoney: 'WebMoney (WMT & WMZ)',
+                vault_bkash: 'bKash (孟加拉国)',
+                footer_text: '© 2026 <strong>ManusClaw v5.0.0</strong> — 来自孟加拉国，由ManusClawAI用<i class="fa-solid fa-fire" style="color:#ec4899;"></i>热爱构建。',
+                footer_repo: '仓库',
+                footer_setup: '安装脚本',
+                footer_license: '许可证',
+                page_title: 'ManusClaw v5.0.0 — 终极自主AI生态系统'
+            },
+            ar: {
+                nav_v5: 'ميزات v5.0.0',
+                nav_arch: 'الهندسة',
+                nav_tools: '14 أداة أساسية',
+                nav_engines: 'المحركات',
+                nav_modes: 'أوضاع النشر',
+                support_btn: 'ادعمنا',
+                drawer_v5: 'ميزات v5.0.0',
+                drawer_arch: 'الهندسة',
+                drawer_tools: '14 أداة أساسية',
+                drawer_engines: 'المحركات الداخلية',
+                drawer_modes: 'أوضاع النشر',
+                drawer_community: 'المجتمع',
+                drawer_vault: 'خزينة الدعم',
+                badge_framework: 'إطار العمل v5.0.0',
+                badge_channels: '12+ قناة',
+                badge_voice: 'الصوت واللوحة',
+                hero_title: 'أول إطار عمل <br><span>ذكاء اصطناعي مستقل</span> في بنغلاديش',
+                hero_desc: 'أطلق العنان لوحوش CLI ذاتية الاستدلال لتنفيذ الكود وتصفح الويب وإنجاز المهام — عبر 12+ قناة مراسلة، مع تنبيه صوتي ولوحة مباشرة A2UI وتوجيه متعدد الوكلاء.',
+                hero_built: 'بُني من',
+                btn_core_repo: 'المستودع الأساسي',
+                btn_setup_script: 'احصل على سكريبت التثبيت',
+                sec_v5_label: 'تطور هائل',
+                sec_v5_title: 'ما الجديد في v5.0.0؟',
+                sec_v5_desc: 'لم يعد ManusClaw مجرد غلاف لروبوت محادثة. لقد تطور إلى منصة ذكاء اصطناعي شاملة حقيقية متعددة القنوات.',
+                v5_card1_title: '12+ قناة مراسلة',
+                v5_card1_desc: 'يعمل الوكلاء الآن بشكل أصلي عبر تلغرام وديسكورد وسلاك وواتساب وسيجنال وتيمز وماتريكس وويب شات والبريد الإلكتروني مع توجيه عبر المنصات.',
+                v5_card2_title: 'وضع التنبيه الصوتي والتحدث',
+                v5_card2_desc: 'يتضمن اكتشاف كلمة التنبيه Porcupine (مثل "Hey Manus") وحلقة تحدث مستمرة. أمر الوكيل عبر الميكروفون واحصل على ردود TTS.',
+                v5_card3_title: 'اللوحة المباشرة (A2UI)',
+                v5_card3_desc: 'تم تمكين بروتوكول الوكيل إلى واجهة المستخدم. يمكن للوكلاء الآن عرض مكونات واجهة المستخدم والرسوم البيانية والجداول والأزرار التفاعلية في الوقت الفعلي عبر WebSocket.',
+                v5_card4_title: 'Webhooks و Gmail Pub/Sub',
+                v5_card4_desc: 'يتميز بـ webhooks واردة متحققة بـ HMAC وأتمتة Gmail Pub/Sub. يمكن للوكلاء التعامل مع المهام والردود التلقائية فور وصول رسائل البريد الإلكتروني.',
+                sec_arch_label: 'ذكاء النظام',
+                sec_arch_title: 'تنسيق متعدد الوكلاء',
+                sec_arch_desc: 'خط أنابيب DAG مستقل تمامًا يعمل على حلقة تنفيذ PAORR صارمة (خطط -> نفذ -> لاحظ -> تأمل -> أعد المحاولة).',
+                arch_card1_title: '1. مدير المنتج 📝',
+                arch_card1_desc: 'يحلل متطلبات المهمة وينشئ PRD (وثيقة متطلبات المنتج). يضع أهدافًا واضحة وقابلة للقياس.',
+                arch_card2_title: '2. المهندس المعماري 🏛️',
+                arch_card2_desc: 'يخطط لهندسة البرمجيات، ويحدد أشجار الدليل ومكدس التقنية. ينشئ خطة تنفيذ DAG مثالية.',
+                arch_card3_title: '3. المهندس (Manus) ⚙️',
+                arch_card3_desc: 'يستخدم ترسانة الأدوات الـ 14 لكتابة الكود وتنفيذه وإصلاح الأخطاء بشكل مستقل دون تدخل بشري.',
+                arch_card4_title: '4. دور ضمان الجودة 🔬',
+                arch_card4_desc: 'يضمن ضمان الجودة من خلال إجراء اختبارات صارمة والتحقق من أن كل شيء جاهز للإنتاج وفقًا لـ PRD.',
+                sec_tools_label: 'ترسانة فتاكة',
+                sec_tools_title: '14 أداة أساسية مدمجة',
+                sec_tools_desc: 'يستخدم الوكيل هذه الأدوات للتفاعل مع العالم الحقيقي. أشكال ناعمة تخفي قوة صناعية.',
+                tools_card1_title: 'Bash المستمر',
+                tools_card1_desc: 'جلسات شل ذات حالة تبقى نشطة في الذاكرة. تحكم في نظام التشغيل بشكل أصلي عبر استدعاءات الأدوات.',
+                tools_card2_title: 'PythonExec المعزول',
+                tools_card2_desc: 'ينفذ الكود في صندوق رمل متعدد المعالجة جديد ومعزول بحد ذاكرة صارم يبلغ 2 جيجابايت.',
+                tools_card3_title: 'استقلالية BrowserUse',
+                tools_card3_desc: 'أتمتة Chromium مدفوعة بـ Playwright. يمنح حرية التنقل والنقر واستخراج بيانات الويب.',
+                tools_card4_title: 'أداة البريد الإلكتروني و Gmail',
+                tools_card4_desc: 'إضافة جديدة! يمكن للوكيل الآن قراءة وإرسال والرد في سلاسل المحادثات بشكل مستقل.',
+                tools_card5_title: 'أداة اللوحة وتصور البيانات',
+                tools_card5_desc: 'يعرض الرسوم البيانية المباشرة ومكونات واجهة المستخدم والعناصر التفاعلية مباشرة على الشاشات المتصلة.',
+                tools_card6_title: 'ذاكرة عبر الجلسات',
+                tools_card6_desc: 'تكامل ذاكرة SQLite + FTS5. يمنح القدرة على تذكر الجلسات السابقة والتعلم من الفشل.',
+                sec_engines_label: 'المحركات الداخلية',
+                sec_engines_title: 'رقمي يبدو حقيقيًا',
+                sec_engines_desc: 'يتم تمثيل المنطق الصلب للإطار وأنظمة الأمان القوية من خلال هذه العناصر الواقعية.',
+                engines_card1_title: 'PAORR ومنطق التراجع',
+                engines_card1_desc: 'تتم معاقبة الأدوات تلقائيًا عند الفشل. يتميز بدوران تجاوز فشل سلس بين مزودي LLM (OpenAI و Groq و Anthropic).',
+                engines_card1_stitch: '━ ━ محسوب',
+                engines_card2_title: 'الهوية والصلاحيات',
+                engines_card2_desc: 'يمنع IdentityGuard كسر الحماية باستخدام 30+ نمط regex. تمنع بوابة الصلاحيات ثلاثية المستويات تنفيذ الأوامر الخطيرة.',
+                engines_card2_stitch: '◇ ◇ مؤمن',
+                engines_card3_title: 'سجل التدقيق و SQLite',
+                engines_card3_desc: 'تسجيل SQLite بوضع WAL. يتم تسجيل كل خطوة واستدعاء أداة و stdout وتتبع خطأ بشكل دائم. لا فقدان للبيانات.',
+                engines_card3_stitch: '◆ ◆ خالد',
+                sec_modes_label: 'النشر',
+                sec_modes_title: 'شغّله في أي مكان تريد',
+                sec_modes_desc: 'يمكن نشر ManusClaw في أي بيئة، من خوادم الخلفية الثقيلة إلى الهواتف الذكية المحمولة.',
+                modes_card1_title: 'CLI مستقل',
+                modes_card1_desc: 'أيقظ شل الذكاء الاصطناعي بأمر الطرفية الأصلي <code>manusclaw</code>. يتضمن أوامر الشرطة المائلة.',
+                modes_card2_title: 'بوابة SSH عن بعد',
+                modes_card2_desc: 'ميزة جديدة! يشغل خادم asyncssh على المنفذ 2222، مما يوفر وصولاً عن بعد عبر شل مقيد.',
+                modes_card3_title: 'سطح المكتب ومركز Windows',
+                modes_card3_desc: 'يتضمن واجهة مستخدم سطح المكتب Flet وشريط قائمة macOS وتطبيقات مرافقة لشريط نظام Windows.',
+                modes_card4_title: '3 خلفيات صندوق رمل',
+                modes_card4_desc: 'يدعم Docker ومضيف SSH عن بعد و OpenShell (مساحات أسماء Linux) لعزل الكود الآمن.',
+                copy_btn: 'نسخ',
+                code_comment1: '# تثبيت ManusClaw v5.0.0 سهل ومباشر',
+                code_comment2: '# التشغيل مع جميع ميزات v5.0 (الصوت، القنوات، واجهة المستخدم)',
+                code_comment3: '# بدء وضع التنبيه الصوتي',
+                community_quote: 'إذا كان ManusClaw قد مكّن سير عملك، ففكر في دعم تطويره المستمر. كل مساهمة تغذي التطور التالي لوكلاء الذكاء الاصطناعي المستقلين.',
+                community_loc: 'المؤسس والمهندس المعماري الرئيسي (SHS Lab)',
+                soc_facebook: 'فيسبوك',
+                soc_telegram: 'تلغرام',
+                soc_email: 'بريد إلكتروني',
+                soc_github: 'جيت هاب',
+                vault_label: 'ادعم المشروع',
+                vault_title: 'خزينة التبرعات',
+                vault_desc: 'إذا كان ManusClaw قد مكّن سير عملك، فادعم المشروع لإبقائه حيًا وتغطية تكاليف اختبار API.',
+                vault_usdt: 'USDT (TRC20 - Tron)',
+                vault_webmoney: 'WebMoney (WMT & WMZ)',
+                vault_bkash: 'bKash (بنغلاديش)',
+                footer_text: '© 2026 <strong>ManusClaw v5.0.0</strong> — بُني بـ <i class="fa-solid fa-fire" style="color:#ec4899;"></i> من بنغلاديش بواسطة ManusClawAI.',
+                footer_repo: 'المستودع',
+                footer_setup: 'سكريبت التثبيت',
+                footer_license: 'الترخيص',
+                page_title: 'ManusClaw v5.0.0 — النظام البيئي النهائي للذكاء الاصطناعي المستقل'
+            }
+        };
+
+        // ==================== LANGUAGE LOGIC ====================
+        let currentLang = localStorage.getItem('manusclaw_lang') || 'en';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('manusclaw_lang', lang);
+            const t = translations[lang];
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.innerHTML = t[key];
+                }
+            });
+
+            if (t['page_title']) {
+                document.title = t['page_title'];
+            }
+
+            document.documentElement.lang = lang === 'bn' ? 'bn' : lang === 'hi' ? 'hi' : lang === 'zh' ? 'zh' :
+                lang === 'ar' ? 'ar' : 'en';
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            const langLabel = document.getElementById('currentLangLabel');
+            const activeOption = document.querySelector(`.lang-option[data-lang="${lang}"]`);
+            if (langLabel && activeOption) {
+                langLabel.textContent = activeOption.getAttribute('data-label');
+            }
+
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.getAttribute('data-lang') === lang) {
+                    opt.classList.add('active');
+                }
+            });
+        }
+
+        // ==================== DROPDOWN TOGGLE ====================
+        const langToggleBtn = document.getElementById('langToggleBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const langToggleWrap = document.getElementById('langToggleWrap');
+
+        langToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!langToggleWrap.contains(e.target)) {
+                langDropdown.classList.remove('open');
+            }
+        });
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const lang = option.getAttribute('data-lang');
+                applyLanguage(lang);
+                langDropdown.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                langDropdown.classList.remove('open');
+            }
+        });
+
+        // ==================== CLIPBOARD ====================
         function copyTextToClipboard(text, btnElement, originalHTML) {
             const tempTextArea = document.createElement("textarea");
             tempTextArea.value = text;
             document.body.appendChild(tempTextArea);
             tempTextArea.select();
-            
             try {
                 document.execCommand('copy');
                 btnElement.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
                 btnElement.style.background = '#10b981';
                 btnElement.style.borderColor = '#10b981';
-                
                 setTimeout(() => {
                     btnElement.innerHTML = originalHTML;
                     btnElement.style.background = '';
@@ -734,41 +2059,30 @@
             document.body.removeChild(tempTextArea);
         }
 
-        // Action for Address Copy
         function copyAddress(id, btn) {
             const text = document.getElementById(id).innerText;
-            const originalHTML = btn.innerHTML;
-            copyTextToClipboard(text, btn, originalHTML);
+            copyTextToClipboard(text, btn, btn.innerHTML);
         }
 
-        // Action for Full Code Block Copy
         function copyCode(btn, elementId) {
             const codeBlock = document.getElementById(elementId);
-            // Removing HTML tags to get raw text for terminal
             let rawText = codeBlock.innerHTML
                 .replace(/<br\s*[\/]?>/gi, "\n")
-                .replace(/<span class="cmt">.*?<\/span>/gi, "") // Remove comments from copied bash
+                .replace(/<span class="cmt">.*?<\/span>/gi, "")
                 .replace(/<[^>]*>/g, "")
                 .trim();
-            
-            // Clean up extra spaces/empty lines created by stripping spans
             rawText = rawText.replace(/\n\s*\n/g, '\n').trim();
-
-            const originalHTML = btn.innerHTML;
-            copyTextToClipboard(rawText, btn, originalHTML);
+            copyTextToClipboard(rawText, btn, btn.innerHTML);
         }
 
-        // Navbar Scroll Effect
-        const navbar = document.getElementById('navbar');
+        // ==================== NAVBAR SCROLL ====================
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
         });
 
-        // Mobile Drawer Logic
+        // ==================== MOBILE DRAWER ====================
         const menuBtn = document.getElementById('menuBtn');
         const sideDrawer = document.getElementById('sideDrawer');
         const drawerOverlay = document.getElementById('drawerOverlay');
@@ -779,26 +2093,25 @@
             sideDrawer.classList.toggle('open');
             drawerOverlay.classList.toggle('active');
         }
-
         menuBtn.addEventListener('click', toggleDrawer);
         closeDrawer.addEventListener('click', toggleDrawer);
         drawerOverlay.addEventListener('click', toggleDrawer);
-        drawerLinks.forEach(link => {
-            link.addEventListener('click', toggleDrawer);
-        });
+        drawerLinks.forEach(link => link.addEventListener('click', toggleDrawer));
 
-        // Intersection Observer for Reveal Animations
+        // ==================== REVEAL ANIMATIONS ====================
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.15 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        console.log('%c🦅 ManusClaw OS v5.0.0 %cActivated Successfully.', 'color:#5b5fef; font-size: 1.5rem; font-weight: 800;', 'color:#10b981; font-size: 1rem;');
+        // ==================== INITIALIZE ====================
+        applyLanguage(currentLang);
+        console.log('%c🦅 ManusClaw v5.0.0 %cReady %c🌐 Language Toggle Active',
+            'color:#5b5fef; font-size:1.2rem;',
+            'color:#10b981;',
+            'color:#f59e0b;');
     </script>
 </body>
 </html>
