@@ -126,7 +126,7 @@ def build() -> None:
     print(f"  Archive    : {archive}.zip")
     print(f"{'='*60}\n")
     print("  Upload these files to your GitHub Release manually:")
-    print(f"    https://github.com/The-JDdev/ManusClaw/releases/new")
+    print(f"    https://github.com/ManusAgents/ManusClaw/releases/new")
     print(f"\n  Tag: {TAG_NAME}\n")
 
 
