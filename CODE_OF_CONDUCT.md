@@ -30,7 +30,7 @@ ManusClaw is built by people who eat logic for breakfast and ship production cod
 ## Scope
 
 This Code of Conduct applies to all ManusClaw community spaces:
-- GitHub repositories (`ManusClawAI/manusclaw`, `The-JDdev/manusclaw-setup`)
+- GitHub repositories (`ManusAgents/manusclaw`, `The-JDdev/manusclaw-setup`)
 - GitHub Issues, Pull Requests, Discussions, and Actions
 - Telegram community chat ([@singularityos](https://t.me/singularityos))
 - Email communications with maintainers

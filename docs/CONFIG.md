@@ -61,7 +61,7 @@ model      = "anthropic/claude-3.5-sonnet"
 max_tokens = 8192
 
 [llm.extra_headers]
-"HTTP-Referer" = "https://github.com/The-JDdev/ManusClaw"
+"HTTP-Referer" = "https://github.com/ManusAgents/ManusClaw"
 "X-Title"      = "ManusClaw"
 ```
 
@@ -199,7 +199,7 @@ max_retries  = 6              # LLM retry attempts on failure
 timeout      = 120            # seconds before LLM request times out
 
 [llm.extra_headers]           # extra HTTP headers (required for OpenRouter)
-# "HTTP-Referer" = "https://github.com/The-JDdev/ManusClaw"
+# "HTTP-Referer" = "https://github.com/ManusAgents/ManusClaw"
 # "X-Title"      = "ManusClaw"
 
 [browser]

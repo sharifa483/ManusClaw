@@ -188,7 +188,7 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for our community standards.
 
 ## Questions?
 
-- Open a [GitHub Discussion](https://github.com/ManusClawAI/manusclaw/discussions) for general questions
+- Open a [GitHub Discussion](https://github.com/ManusAgents/manusclaw/discussions) for general questions
 - Email security issues to [thejddev.official@gmail.com](mailto:thejddev.official@gmail.com)
 - Join [Telegram](https://t.me/singularityos) for community chat
 
