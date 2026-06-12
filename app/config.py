@@ -11,10 +11,14 @@ Config loads in priority order (highest first):
   5. ~/.manusclaw/config.yaml
   6. ./config.toml  (legacy)
   7. Built-in defaults (MockLLM — safe for immediate use)
+
+NEW: Hot-reload support — Config.watch() monitors config files and
+automatically reloads when changes are detected, without restart.
 """
 
 import os
 import threading
+import time
 from enum import Enum
 from pathlib import Path
 from typing import Optional
@@ -55,7 +59,7 @@ class LLMConfig(BaseModel):
     max_tokens:     int            = 4096
     temperature:    float          = 0.0
     max_retries:    int            = 15
-    timeout:        int            = 1800   # 30 minutes — safe for deep-reasoning models (DeepSeek R1, o1, etc.)
+    timeout:        int            = 1800
     extra_headers:  dict[str, str] = Field(default_factory=dict)
     extra_api_keys: list[str]      = Field(default_factory=list)
 
@@ -138,7 +142,8 @@ class AppConfig(BaseModel):
 
 class Config:
     """
-    Thread-safe singleton config loader with named profile support.
+    Thread-safe singleton config loader with named profile support
+    and hot-reload capability.
     """
 
     _instance: Optional["Config"] = None
@@ -146,6 +151,11 @@ class Config:
 
     def __init__(self, path: str = "config.toml") -> None:
         self._data: AppConfig = self._load(path)
+        self._config_path: str = path
+        self._watcher: Optional[threading.Thread] = None
+        self._watching: bool = False
+        self._last_mtime: float = 0.0
+        self._on_reload_callbacks: list = []
 
     @classmethod
     def get(cls, path: str = "config.toml") -> "Config":
@@ -157,7 +167,81 @@ class Config:
     @classmethod
     def reset(cls) -> None:
         with cls._lock:
+            inst = cls._instance
+            if inst and inst._watching:
+                inst.stop_watching()
             cls._instance = None
+
+    # ------------------------------------------------------------------
+    # Hot-reload support
+    # ------------------------------------------------------------------
+
+    def watch(self, interval: float = 2.0) -> None:
+        """Start watching config file for changes and auto-reload."""
+        if self._watching:
+            return
+        self._watching = True
+        config_path = Path(self._config_path)
+
+        # Also watch profile config files
+        profile = os.getenv("MANUSCLAW_PROFILE", "")
+        watched_paths = [config_path]
+        if profile:
+            watched_paths.append(_HOME / "profiles" / profile / "config.yaml")
+            watched_paths.append(_HOME / "profiles" / profile / "config.toml")
+        watched_paths.append(_HOME / "config.yaml")
+        watched_paths.append(_HOME / "config.toml")
+
+        # Record initial mtimes
+        self._path_mtimes: dict[str, float] = {}
+        for p in watched_paths:
+            if p.exists():
+                self._path_mtimes[str(p)] = p.stat().st_mtime
+
+        def _watcher_loop():
+            while self._watching:
+                try:
+                    for p_str, old_mtime in list(self._path_mtimes.items()):
+                        p = Path(p_str)
+                        if p.exists():
+                            new_mtime = p.stat().st_mtime
+                            if new_mtime > old_mtime:
+                                from app.logger import logger
+                                logger.info(f"[Config] Change detected in {p_str}, reloading...")
+                                self._reload()
+                                self._path_mtimes[p_str] = new_mtime
+                                for cb in self._on_reload_callbacks:
+                                    try:
+                                        cb()
+                                    except Exception:
+                                        pass
+                                break
+                except Exception:
+                    pass
+                time.sleep(interval)
+
+        self._watcher = threading.Thread(target=_watcher_loop, daemon=True)
+        self._watcher.start()
+
+    def stop_watching(self) -> None:
+        """Stop the config file watcher."""
+        self._watching = False
+        if self._watcher:
+            self._watcher.join(timeout=5.0)
+            self._watcher = None
+
+    def on_reload(self, callback) -> None:
+        """Register a callback to be called when config is hot-reloaded."""
+        self._on_reload_callbacks.append(callback)
+
+    def _reload(self) -> None:
+        """Reload config from disk."""
+        with self._lock:
+            try:
+                self._data = self._load(self._config_path)
+            except Exception as e:
+                from app.logger import logger
+                logger.error(f"[Config] Reload failed: {e}")
 
     # ------------------------------------------------------------------
     # Internal loading
@@ -182,9 +266,6 @@ class Config:
 
         # Overlay environment variables
         if not cfg.llm.api_key:
-            # FIX: Pick provider-specific env var first so that having both
-            # OPENAI_API_KEY and ANTHROPIC_API_KEY doesn't incorrectly pick
-            # OPENAI_API_KEY when provider="anthropic".
             _provider_key_map = {
                 "openai":    os.getenv("OPENAI_API_KEY"),
                 "anthropic": os.getenv("ANTHROPIC_API_KEY"),
